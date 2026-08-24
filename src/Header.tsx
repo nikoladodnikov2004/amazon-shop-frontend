@@ -1,25 +1,43 @@
-
+import {Heart, ShoppingBag, SearchIcon, User, MenuIcon} from 'lucide-react';
 
 function Header() { 
     
     return (
-        <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
-            <h1 className="text-xl font-bold">Amazon Shop</h1>
+        <header className="flex justify-between items-center p-6 bg-gray-800 text-white">
+            
             <nav >
                 <ul  className="flex items-center gap-4">
-                    <li><a href="#" className="hover:underline font-sans text-xl">Home</a></li>
-                    <li><a href="#" className="hover:underline font-sans text-xl">Products</a></li>
-                    <li><a href="#" className="hover:underline font-sans text-xl">About</a></li>
+                    
+                    
+                    
+                    <button className="relative text-gray-300 hover:text-[#00c288] transition-colors duration-300">
+                                <MenuIcon className="h-6 w-6" />
+                                
+                            </button>
 
                         
                     
                 </ul>
                 
             </nav>
-            <div className="flex  items-center gap-4 ">
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Login</button>
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Register</button>
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cart</button>
+            <h1 className="text-xl font-bold">AmazonShop</h1>
+            <div className="flex  items-center gap-7 ">
+                                <button className="relative text-gray-300 hover:text-[#00c288] transition-colors duration-300">
+                                <SearchIcon className="h-6 w-6" />
+                                
+                            </button>
+                            <button className="relative text-gray-300 hover:text-[#00c288] transition-colors duration-300">
+                                <Heart className="h-6 w-6" />
+                                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs">0</span>
+                            </button>
+                            
+                            <button className="relative text-gray-300 hover:text-[#00c288] transition-colors duration-300">
+                                <User className="h-6 w-6" />
+                            </button>
+                            <button className="relative text-gray-300 hover:text-[#00c288] transition-colors duration-300">
+                                <ShoppingBag className="h-6 w-6" />
+                                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs">0</span>
+                            </button>
                         </div>
             
         </header>
