@@ -1,6 +1,8 @@
 import { Form } from 'lucide-react';
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
+import logo from '../assets/niesalogin.svg';
+
 
 
 export default function LoginPage() {
@@ -22,7 +24,11 @@ return (
     
     <div className='text-center mb-8'>
         
-                  
+        <img 
+          src={logo} 
+          alt="Niesa LogIn" 
+          className="w-52 h-auto mb-4 mx-auto block"
+        />
         <h2 className='text-3xl font-extrabold tracking-tight'>Добре дошли</h2>
         <p className='text-[#8EB69B] text-sm mt-3'>Влезте в своя профил за да продължите</p>
     </div>
