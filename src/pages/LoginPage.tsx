@@ -57,7 +57,7 @@ return (
         <img 
           src={logo} 
           alt="Niesa LogIn" 
-          className="w-52 h-auto mb-4 mx-auto block"
+          className="w-52 h-auto mb-4 mx-auto block shadow-[0_4px_25px_rgba(35,83,71,0.5)] rounded-2xl"
         />
         <h2 className='text-3xl font-extrabold tracking-tight'>Добре дошли</h2>
         <p className='text-[#8EB69B] text-sm mt-3'>Влезте в своя профил, за да продължите</p>
