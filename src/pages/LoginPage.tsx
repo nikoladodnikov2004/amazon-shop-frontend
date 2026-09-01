@@ -2,17 +2,38 @@ import { Form } from 'lucide-react';
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import logo from '../assets/niesalogin.svg';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { Icon } from 'lucide-react';
+import { EyeOff } from 'lucide-react';
+import { Eye } from 'lucide-react';
 
 
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword]= useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading]= useState(false);
 
-const handleSubmit = (e: React.FormEvent) => {
+  const {login}=useAuth();
+  const navigate = useNavigate();
+
+const handleSubmit = async(e: React.FormEvent) => {
   e.preventDefault();
-  // Handle login logic here
-  console.log('Login attempted:', { email, password });
+  setError(null);
+  setLoading(true);
+
+  try{
+    await login(email, password);
+    navigate('/');
+  }catch(err:any){
+    setError(err.response?.data?.message ||'Грешен имейл или парола!')
+  }finally{
+    setLoading(false)
+  }
+  
 };
 
 return (
@@ -30,7 +51,7 @@ return (
           className="w-52 h-auto mb-4 mx-auto block"
         />
         <h2 className='text-3xl font-extrabold tracking-tight'>Добре дошли</h2>
-        <p className='text-[#8EB69B] text-sm mt-3'>Влезте в своя профил за да продължите</p>
+        <p className='text-[#8EB69B] text-sm mt-3'>Влезте в своя профил, за да продължите</p>
     </div>
 
     <form onSubmit={handleSubmit} className='space-y-5'>
@@ -46,18 +67,33 @@ return (
         />
       </div>
       <div>
-        <label className='block text-xs font-mono uppercase mb-2'>Парола</label>
+        <div className='flex items-center justify-between'>
+        <label className='text-xs font-mono uppercase mb-2'>Парола</label>
+        
+        <p className='text-xs font-mono  mb-2 '>
+          <Link to="/" className='text-[#DAF1DE] font-semibold underline hover:text-[#8EB69B] transition-colors'>Забравена парола?</Link>
+        </p>
+        </div>
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
           placeholder='Password'
-           className='w-full bg-[#051F20] border border-[#163B32] rounded-xl px-4 py-3.5 text-[#DAF1DE] placeholder-[#8EB69B]/40 focus:outline-none focus:border-[#8EB69B] focus:ring-1 focus:ring-[#8EB69B] transition-all'
+           className='w-full pr-12 bg-[#051F20] border border-[#163B32] rounded-xl px-4 py-3.5 text-[#DAF1DE] placeholder-[#8EB69B]/40 focus:outline-none focus:border-[#8EB69B] focus:ring-1 focus:ring-[#8EB69B] transition-all'
         />
-      </div>
+        <button
+          type="button"
+          onClick={()=>setShowPassword(!showPassword)}
+          className='absolute right-14 mt-4 text-[#8EB69B] hover:text-[#DAF1DE] transition-colors cursor-pointer'
+        >
+          {showPassword ? <EyeOff size={20}/> : <Eye size={20} />}
+        </button>
+          </div>
+          
       <button type="submit" className='w-full py-4 mt-2 rounded-xl bg-[#235347] text-[#DAF1DE] font-semibold hover:bg-[#163B32] transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)] border border-[#8EB69B]/20 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer '>Влез в профила</button>
     </form>
+    
     <p className='text-center text-xs text-[#8EB69B] mt-8'>
       Нямате профил? <Link to="/register" className='text-[#DAF1DE] font-semibold underline hover:text-[#8EB69B] transition-colors'>Регистрирайте се</Link>
     </p>
