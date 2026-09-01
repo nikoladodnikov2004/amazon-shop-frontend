@@ -7,10 +7,11 @@ import { useAuth } from '../context/AuthContext';
 import { Icon } from 'lucide-react';
 import { EyeOff } from 'lucide-react';
 import { Eye } from 'lucide-react';
-
-
+import { useGoogleLogin } from '@react-oauth/google';
+import { FaFacebook, FaApple, FaGoogle } from 'react-icons/fa';
 
 export default function LoginPage() {
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword]= useState(false);
@@ -19,6 +20,14 @@ export default function LoginPage() {
 
   const {login}=useAuth();
   const navigate = useNavigate();
+
+  const googleLogin=useGoogleLogin({
+    onSuccess:(tokenResponse) =>{
+      console.log('Google Token:', tokenResponse.access_token);
+    },
+    onError:() =>console.error('Google Login Failed'),
+  });
+
 
 const handleSubmit = async(e: React.FormEvent) => {
   e.preventDefault();
@@ -94,6 +103,30 @@ return (
       <button type="submit" className='w-full py-4 mt-2 rounded-xl bg-[#235347] text-[#DAF1DE] font-semibold hover:bg-[#163B32] transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)] border border-[#8EB69B]/20 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer '>Влез в профила</button>
     </form>
     
+    <div className='flex items-center justify-center gap-6 my-5'>
+      <button
+      type='button'
+      onClick={() => googleLogin} 
+      className='w-12 h-12 rounded-full bg-[#235347] border border-[#8EB69B]/20 hover:bg-[#0B3B2F] transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)] flex items-center justify-center'>
+        <FaGoogle size={25}></FaGoogle>
+      </button>
+      
+
+      <button
+      type='button'
+      onClick={() => googleLogin} 
+      className='w-12 h-12 rounded-full bg-[#235347] border border-[#8EB69B]/20 hover:bg-[#0B3B2F] transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)] flex items-center justify-center'>
+        <FaApple size={25}></FaApple>
+      </button>
+
+      <button
+      type='button'
+      onClick={() => googleLogin} 
+      className='w-12 h-12 rounded-full bg-[#235347] border border-[#8EB69B]/20 hover:bg-[#0B3B2F] transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)] flex items-center justify-center'>
+        <FaFacebook size={25}></FaFacebook>
+      </button>
+    </div>
+
     <p className='text-center text-xs text-[#8EB69B] mt-8'>
       Нямате профил? <Link to="/register" className='text-[#DAF1DE] font-semibold underline hover:text-[#8EB69B] transition-colors'>Регистрирайте се</Link>
     </p>
