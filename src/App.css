@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'NiesaTitleFont';
+  src: url('./assets/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-niesa{
+  font-family: 'NiesaTitleFont', sans-serif;
+}
 .counter {
   font-size: 16px;
   padding: 5px 10px;

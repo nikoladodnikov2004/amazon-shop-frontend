@@ -52,8 +52,8 @@ function Hero() {
     </SwiperSlide>
 
   </Swiper>
-  <div className='absolute items-center justify-center z-20'>
-  <h2>NIESA</h2>
+  <div className="absolute items-center justify-center z-20">
+  <h1 className="font-niesa text-[256px] tracking-widest uppercase">Niesa</h1>
   </div>
   </div>
 </div>
