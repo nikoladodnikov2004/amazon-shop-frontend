@@ -14,31 +14,16 @@ import './App.css';
 function Hero() {
   return (
     
-
-  <div className="w-full min-h-screen h-[85v] bg-[#051F20] text-[#DAF1DE] pb-72 px-6 flex justify-center items-center relative overflow-hidden font-sans">
-
-
-
-        
-
-      
-
-      
+<div className="w-full min-h-screen bg-[#051F20] text-[#DAF1DE] px-6 flex justify-center items-center relative overflow-hidden font-sans">
+  <div className="relative w-[95%] h-[92vh] max-w-9xl min-h-[680px] mt-4 flex items-center justify-center">
     
-
-
     <Swiper
       modules={[Navigation, Pagination, Autoplay]}
       navigation={{ prevEl: '#hero-prev', nextEl: '#hero-next' }}
       pagination={{clickable: true}}
       autoplay={{delay: 5000}}
-      className="notched-banner w-[95%] h-[95vh] max-w-9xl min-h-[680px] rounded-xl flex items-center justify-center mt-4  shadow-[0_0px_20px_-5px_rgba(15,23,42,0.4)]"
+      className="notched-banner w-full h-full mb-10 rounded-xl shadow-[0_0px_20px_-5px_rgba(15,23,42,0.4)] z-0"
     >
-
-        
-    
-        
-    
  
     <SwiperSlide>
     <img 
@@ -67,8 +52,11 @@ function Hero() {
     </SwiperSlide>
 
   </Swiper>
+  <div className='absolute items-center justify-center z-20'>
+  <h2>NIESA</h2>
   </div>
-
+  </div>
+</div>
   );
 }
 export default Hero;
