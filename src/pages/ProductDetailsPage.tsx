@@ -29,6 +29,10 @@ function ProductDetailsPage(){
 
     }
 
+    
+        
+    
+
     return (
         <div className="min-h-screen bg-[#051F20] text-[#DAF1DE] py-10 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
@@ -53,15 +57,17 @@ function ProductDetailsPage(){
                             <FiHeart className="text-[#DAF1DE] hover:text-[#10B981] hover:fill-[#10B981] transition-colors duration-300 size-4" />
                         </button>
                     {product.badge && (
-                        <span className="absolute top-8 left-8 bg-[#10B981] text-[#051F20] text-xs font-bold uppercase ">{product.badge}</span>
+                        <span className="font-niesa text-center text-[#DAF1DE] absolute w-16 top-8 left-8 bg-[#10B981] text-[#051F20] text-2xl rounded-full shadow-md font-bold uppercase ">{product.badge}</span>
                     )}
                 </div>
 
                 <div className="flex flex-col space-y-6">
                     <div>
+
                         <span className="text-xs font-bold text-[#10B981] uppercase tracking-wider">
                             {product.category}
                         </span>
+                        
                         <h1 className="text-3xl font-extrabold text-[#DAF1DE] mt-2">
                             {product.name}
                         </h1>
@@ -127,18 +133,22 @@ function ProductDetailsPage(){
                     <div className="flex gap-4 pt-6 border-t border-[#163B32]">
                         <div className="flex items-center border border-[#163B32] bg-[#163B32]/20 rounded-xl px-4 py-3 gap-4">
                             <button
-                                onClick={() =>setQuantity((q) =>Math.max(1,q-1))}
+                                onClick={() =>setQuantity((q) =>Math.max(1,q-1))
+                                    
+                                }
                                 className="font-bold text-lg hover:text-[#10B981]"
                                 >
                                     -
                             </button>
                             <span className="font-bold">{quantity}</span>
                             <button
+                                disabled={product.inStock<=quantity}
                                 onClick={() =>setQuantity((q) =>q+1)}
-                                className="font-bold text-lg hover:text-[#10B981]"
+                                className="font-bold text-lg hover:text-[#10B981] disabled:opacity-30 disabled:cursor-not-allowed"
                                 >
                                     +
                                     </button>
+                                   
                         </div>
 
                         <button className="flex-1 bg-[#10B981] hover:bg-[#235347] text-[#051F20] hover:text-[#DAF1DE] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors">
