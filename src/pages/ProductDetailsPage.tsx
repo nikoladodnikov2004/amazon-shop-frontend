@@ -1,63 +1,122 @@
-import React from "react";
-import { useParams, Link } from "react-router-dom";
-import { sectionData } from "../data/productData"; // Коригирайте пътя спрямо файла ви
+import React, {useState} from "react";
+import {useParams, Link} from "react-router-dom";
+import {sectionData} from "../data/productData";
+import {FiShoppingBag, FiHeart, FiArrowLeft, FiCheck, FiTruck} from "react-icons/fi" 
 
-function ProductDetailsPage() {
-  const { id } = useParams<{ id: string }>();
 
-  // Търсим продукта във всички секции
-  const product = sectionData
+function ProductDetailsPage(){
+    const {id} = useParams<{id:string}>();
+    const [quantity, setQuantity] = useState(1);
+    const [isLiked, setIsLiked]=useState(false);
+
+    const allProducts =sectionData
     .flatMap((section) => section.products)
-    .find((p) => p.id === Number(id));
+    
+    const product=allProducts.find((p) => p.id ===Number(id));
 
-  if (!product) {
-    return (
-      <div className="min-h-screen bg-[#051F20] flex flex-col items-center justify-center text-[#DAF1DE]">
-        <h2 className="text-2xl font-bold mb-4">Продуктът не е намерен!</h2>
-        <Link to="/" className="bg-[#10B981] text-[#051F20] px-4 py-2 rounded-xl font-bold">
-          Върни се в началото
-        </Link>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-[#051F20] text-[#DAF1DE] py-12 px-6 flex justify-center">
-      <div className="max-w-4xl w-full bg-[#163B32]/40 border border-[#163B32] p-8 rounded-2xl flex flex-col md:flex-row gap-8 items-center">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full md:w-1/2 h-80 object-cover rounded-xl"
-        />
-        <div className="flex flex-col justify-between h-full w-full">
-          <div>
-            <span className="text-xs text-[#10B981] font-bold uppercase tracking-wider">
-              {product.category}
-            </span>
-            <h1 className="text-3xl font-bold mt-2">{product.name}</h1>
-            <p className="text-yellow-400 mt-2">★ {product.rating}</p>
-            <p className="text-[#DAF1DE]/70 mt-4">
-              Подробно описание на продукта, неговите характеристики и спецификации.
-            </p>
-          </div>
-
-          <div className="mt-8 pt-4 border-t border-[#DAF1DE]/10 flex items-center justify-between">
-            <div>
-              {product.oldPrice && (
-                <span className="line-through text-sm text-[#DAF1DE]/40 block">
-                  {product.oldPrice}
-                </span>
-              )}
-              <span className="text-2xl font-bold text-[#10B981]">{product.price}</span>
+    if(!product){
+        return (
+            <div className="min-h-[70vh] bg-[#051F20] flex flex-col items-center justify-center text-[#DAF1DE] px-4">
+                <h2 className="text-3xl font-bold mb-4">Продуктът не е намерен</h2>
+                <p>Възможно е продуктът да е премахнат или линкът да е грешен.</p>
+                <Link
+                to="/"
+                className="bg-[#10B981] text-[#051F20] font-bold px-6 py-3 rounded-xl hover:bg-[#235347] hover:text-[#DAF1DE] transition-all">
+                Върни се към каталога
+                </Link>
             </div>
-            <button className="bg-[#10B981] text-[#051F20] font-bold px-6 py-3 rounded-xl hover:bg-[#235347] hover:text-[#DAF1DE] transition-all">
-              Купи сега
-            </button>
-          </div>
+        );
+
+    }
+
+    return (
+        <div className="min-h-screen bg-[#051F20] text-[#DAF1DE] py-10 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+                <Link
+                to="/"
+                className="inline-flex items-center gap-2 text-[#DAF1DE]/60 hover:text-[#10B981] transition-colors mb-8 text-sm font-medium">
+                    <FiArrowLeft/>
+                </Link>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mt-20">
+
+                <div className="relative group rounded-3xl overflow-hidden bg-[#163B32]/30 border border-[#163B32] p-4 ">
+                    <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-[400px] sm:h-[500px] object-cover rounded-2xl">
+
+                        </img>
+                        <button 
+                        onClick={() =>setIsLiked(!isLiked)}
+                        className="absolute top-8 right-8 w-11 h-11 backdrop-blur-md rounded-full bg-[#051F20]/70 flex items-center justify-center hover:text-[#10B981] transition-colors duration-300">
+                            <FiHeart className="text-[#DAF1DE] hover:text-[#10B981] hover:fill-[#10B981] transition-colors duration-300 size-4" />
+                        </button>
+                    {product.badge && (
+                        <span className="absolute top-8 left-8 bg-[#10B981] text-[#051F20] text-xs font-bold uppercase ">{product.badge}</span>
+                    )}
+                </div>
+
+                <div className="flex flex-col space-y-6">
+                    <div>
+                        <span className="text-xs font-bold text-[#10B981] uppercase tracking-wider">
+                            {product.category}
+                        </span>
+                        <h1 className="text-3xl font-extrabold text-[#DAF1DE] mt-2">
+                            {product.name}
+                        </h1>
+
+                        <div className="flex items-center gap-4 mt-3 text-sm">
+                            <span className="text-[#10B981] flex items-center gap-1">
+                                <FiCheck size={16}></FiCheck>
+                                В наличност
+                            </span>
+                        </div>
+
+                        <div className="flex items-baseline gap-4 mt-6">
+                            <span className="text-3xl font-extrabold text-[#DAF1DE]">
+                                {product.price}
+                            </span>
+                            {product.oldPrice && (
+                                <span className="text-lg line-through text-[#DAF1DE]/40">
+                                    {product.oldPrice}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="flex gap-4 pt-6 border-t border-[#163B32]">
+                        <div className="flex items-center border border-[#163B32] bg-[#163B32]/20 rounded-xl px-4 py-3 gap-4">
+                            <button
+                                onClick={() =>setQuantity((q) =>Math.max(1,q-1))}
+                                className="font-bold text-lg hover:text-[#10B981]"
+                                >
+                                    -
+                            </button>
+                            <span className="font-bold">{quantity}</span>
+                            <button
+                                onClick={() =>setQuantity((q) =>q+1)}
+                                className="font-bold text-lg hover:text-[#10B981]"
+                                >
+                                    +
+                                    </button>
+                        </div>
+
+                        <button className="flex-1 bg-[#10B981] hover:bg-[#235347] text-[#051F20] hover:text-[#DAF1DE] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors">
+                            <FiShoppingBag size={20}></FiShoppingBag>
+                            Купи ({quantity})
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+
+        </div>
+    )
 }
 
 export default ProductDetailsPage;
+
+
+
+
