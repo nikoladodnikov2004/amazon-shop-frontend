@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {sectionData} from "../data/productData";
-import {FiShoppingBag, FiHeart, FiArrowLeft, FiCheck, FiTruck} from "react-icons/fi" 
+import {FiShoppingBag, FiHeart, FiArrowLeft, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
 
 
 function ProductDetailsPage(){
@@ -65,14 +65,53 @@ function ProductDetailsPage(){
                         <h1 className="text-3xl font-extrabold text-[#DAF1DE] mt-2">
                             {product.name}
                         </h1>
-
-                        <div className="flex items-center gap-4 mt-3 text-sm">
+                        <h1 className="text-sm font-extrabold text-[#DAF1DE] mt-5">
+                           Марка: {product.brand}
+                        </h1>
+                        <h1 className="text-sm font-extrabold text-[#DAF1DE] mt-2">
+                           Сериен номер: {product.serialNumber}
+                        </h1>
+                        <h1 className="text-sm font-extrabold text-[#DAF1DE] mt-2">
+                           Състояние на продукта: {product.condition}
+                        </h1>
+                        
+                        
+                        <div className="my-2 mt-5">
+                            <span className="font-semibold text-gray-200 block mb-1">Характеристики:</span>
+                            <div className="flex flex-col gap-1">
+                                {product.features?.map((feature, index) => (
+                                    <div key={index} className="flex items-start gap-2 text-sm text-gray-300">
+                                        <span className="text-emerald-400 font-bold">•</span>
+                                        <span>{feature}</span>
+                            </div>
+                                ))}
+                        </div>
+                        </div>
+                            <div className="grid grid-cols-1 lg:grid-cols-2 ">
+                        <div className="flex items-center gap-8 mt-4 text-sm">
                             <span className="text-[#10B981] flex items-center gap-1">
                                 <FiCheck size={16}></FiCheck>
                                 В наличност
                             </span>
+                            <span className="text-[#DAF1DE] flex items-center gap-1">
+                                <FiTruck size={16}></FiTruck>
+                                 {product.dateDelivery}
+                            </span>
+                            
                         </div>
+                            </div>
 
+                            <div className="mt-6">
+                                <p className="text-sm text-[#DAF1DE]/35 tracking-wide ">Датата на доставка е ориентировъчна и зависи от населеното място и от избраната куриерска фирма. 
+                                Точната дата, на която продуктът ще е при теб, както и финалната цена на доставка 
+                                можеш да разбереш при завършване на поръчката.</p>
+                            </div>
+
+                            <div className="mt-8 flex items-center justify-center gap-1 text-[#163B32] font-extrabold bg-[#DAF1DE] rounded-full px-2 py-2 shadow-md">
+                                <FiBox size={26}></FiBox>
+                                <span>Още {product.inStock} броя налични в нашия склад</span>
+                            </div>
+                            
                         <div className="flex items-baseline gap-4 mt-6">
                             <span className="text-3xl font-extrabold text-[#DAF1DE]">
                                 {product.price}
@@ -105,10 +144,23 @@ function ProductDetailsPage(){
                         <button className="flex-1 bg-[#10B981] hover:bg-[#235347] text-[#051F20] hover:text-[#DAF1DE] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors">
                             <FiShoppingBag size={20}></FiShoppingBag>
                             Купи ({quantity})
+                            
                         </button>
                     </div>
+                    
                 </div>
+                
             </div>
+            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-40">
+                            Пълно описание на продукта
+            </h1>
+            <p className="text-md text-gray-300 mt-10">
+                            {product.description}
+                        </p>
+            
+            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-20">
+                            Всички характеристики на продукта
+            </h1>
         </div>
 
         </div>
