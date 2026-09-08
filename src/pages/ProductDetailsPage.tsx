@@ -9,11 +9,17 @@ function ProductDetailsPage(){
     const [quantity, setQuantity] = useState(1);
     const [isLiked, setIsLiked]=useState(false);
 
+    const [selectedImage, setSelectedImage]= useState(0);
+    
+    
+
+
     const allProducts =sectionData
     .flatMap((section) => section.products)
     
     const product=allProducts.find((p) => p.id ===Number(id));
-
+     
+    
     if(!product){
         return (
             <div className="min-h-[70vh] bg-[#051F20] flex flex-col items-center justify-center text-[#DAF1DE] px-4">
@@ -34,6 +40,8 @@ function ProductDetailsPage(){
     
 
     return (
+
+        
         <div className="min-h-screen bg-[#051F20] text-[#DAF1DE] py-10 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
                 <Link
@@ -43,14 +51,15 @@ function ProductDetailsPage(){
                 </Link>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mt-20">
-
+                    <div className="flex flex-col gap-4">
                 <div className="relative group rounded-3xl overflow-hidden bg-[#163B32]/30 border border-[#163B32] p-4 ">
                     <img
-                        src={product.image}
+                        src={product.images?.[selectedImage]}
                         alt={product.name}
                         className="w-full h-[400px] sm:h-[500px] object-cover rounded-2xl">
 
                         </img>
+                        
                         <button 
                         onClick={() =>setIsLiked(!isLiked)}
                         className="absolute top-8 right-8 w-11 h-11 backdrop-blur-md rounded-full bg-[#051F20]/70 flex items-center justify-center hover:text-[#10B981] transition-colors duration-300">
@@ -59,6 +68,26 @@ function ProductDetailsPage(){
                     {product.badge && (
                         <span className="font-niesa text-center text-[#DAF1DE] absolute w-16 top-8 left-8 bg-[#10B981] text-[#051F20] text-2xl rounded-full shadow-md font-bold uppercase ">{product.badge}</span>
                     )}
+                </div>
+                <div className="flex gap-3 overflow-x-auto pb-2">
+                            {product.images?.map((img, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setSelectedImage(index)}
+                                    className={`w-20 h-20 rounded-2xl overflow-hidden border-2 transition-all shrink-0 ${
+                                        selectedImage === index
+                                            ? "border-[#10B981] opacity-100 scale-95"
+                                            : "border-[#163B32] opacity-60 hover:opacity-100"
+                                    }`}
+                                >
+                                    <img
+                                        src={img}
+                                        alt={`Thumbnail ${index}`}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </button>
+                            ))}
+                        </div>
                 </div>
 
                 <div className="flex flex-col space-y-6">
