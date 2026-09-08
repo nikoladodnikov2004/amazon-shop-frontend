@@ -3,7 +3,7 @@ import {useParams, Link} from "react-router-dom";
 import {sectionData} from "../data/productData";
 import {FiShoppingBag, FiHeart, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
 import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders  } from "react-icons/fi"
-
+import ProductCard from"./ProductCard";
 
 function ProductDetailsPage(){
     const {id} = useParams<{id:string}>();
@@ -31,13 +31,20 @@ function ProductDetailsPage(){
 };
     
 
+    
+
 
     const allProducts =sectionData
     .flatMap((section) => section.products)
     
     const product=allProducts.find((p) => p.id ===Number(id));
      
-    
+    const relatedProducts=allProducts
+        .filter((item) => item.category === product?.category && item.id !== product?.id)
+        .slice(0,4);
+
+
+
     if(!product){
         return (
             <div className="min-h-[70vh] bg-[#051F20] flex flex-col items-center justify-center text-[#DAF1DE] px-4">
@@ -223,35 +230,50 @@ function ProductDetailsPage(){
                 </div>
                 
             </div>
-            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-40">
+            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-40 pt-10 border-t border-[#DAF1DE]/25">
                             Пълно описание на продукта
             </h1>
             <p className="text-md text-gray-300 mt-10">
                             {product.description}
                         </p>
             
-            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-20">
+            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-20 pt-10 border-t border-[#DAF1DE]/25">
                             Всички характеристики на продукта
             </h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-10">
-  {product.specifications?.map((spec, index) => (
-    <div 
-      key={index} 
-      className="bg-[#235347] rounded-full px-6 py-3 flex items-center justify-between text-white border border-[#DAF1DE]/20 hover:border-[#DAF1DE]/60 transition-all"
-    >
-      <div className="flex items-center gap-2">
-        {renderIcon(spec.icon)}
-        <span className="uppercase tracking-wide font-extrabold text-sm">
-          {spec.label}
-        </span>
-      </div>
+            {product.specifications?.map((spec, index) => (
+                <div 
+                key={index} 
+                className="bg-[#235347] rounded-full px-6 py-3 flex items-center justify-between text-white border border-[#DAF1DE]/20 hover:border-[#DAF1DE]/60 transition-all"
+                >
+                <div className="flex items-center gap-2">
+                    {renderIcon(spec.icon)}
+                    <span className="uppercase tracking-wide font-extrabold text-sm">
+                    {spec.label}
+                    </span>
+                </div>
 
-      <span className="font-medium text-sm text-[#DAF1DE]">
-        {spec.value}
-      </span>
-    </div>
-  ))}
-</div>
+                <span className="font-medium text-sm text-[#DAF1DE]">
+                    {spec.value}
+                </span>
+                </div>
+            ))}
+            </div>
+
+
+            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-20 pt-10 border-t border-[#DAF1DE]/25">
+                            Разгледайте още подобни продукти
+            </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+            
+            {relatedProducts.map((prod) =>(
+                <ProductCard key={prod.id} product={prod}></ProductCard>
+            ))}
+        </div>
+
+
+
+
         </div>
 
         </div>
