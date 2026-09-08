@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {sectionData} from "../data/productData";
-import {FiShoppingBag, FiHeart, FiArrowLeft, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
+import {FiShoppingBag, FiHeart, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
 
 
 function ProductDetailsPage(){
@@ -69,7 +69,15 @@ function ProductDetailsPage(){
                         <span className="font-niesa text-center text-[#DAF1DE] absolute w-16 top-8 left-8 bg-[#10B981] text-[#051F20] text-2xl rounded-full shadow-md font-bold uppercase ">{product.badge}</span>
                     )}
                 </div>
-                <div className="flex gap-3 overflow-x-auto pb-2">
+                <div className="flex gap-3 overflow-x-auto pb-2 flex items-center justify-center">
+                    
+                    <button
+                    disabled={selectedImage=== 0}
+                    onClick={()=> setSelectedImage((i) =>Math.max(0,i-1))}
+                    className="bg-[#DAF1DE] text-[#163B32] rounded-md shadow-md cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                    >
+                    <FiChevronLeft size={30}></FiChevronLeft>
+                    </button>
                             {product.images?.map((img, index) => (
                                 <button
                                     key={index}
@@ -87,6 +95,13 @@ function ProductDetailsPage(){
                                     />
                                 </button>
                             ))}
+                                            <button
+                    disabled={selectedImage === (product.images?.length ?? 1) - 1}
+                    onClick={() => setSelectedImage((i) => i + 1)}
+                    className="bg-[#DAF1DE] text-[#163B32] rounded-md shadow-md cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                    <FiChevronRight size={30} />
+                </button>
                         </div>
                 </div>
 
