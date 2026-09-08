@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {sectionData} from "../data/productData";
 import {FiShoppingBag, FiHeart, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
+import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders  } from "react-icons/fi"
 
 
 function ProductDetailsPage(){
@@ -11,6 +12,23 @@ function ProductDetailsPage(){
 
     const [selectedImage, setSelectedImage]= useState(0);
     
+    const renderIcon=(iconName?: string)=>
+    {
+        switch(iconName){
+        case "tag":return<FiTag size={20}></FiTag>
+        case "zap":return<FiZap size={20}></FiZap>
+        case "shield":return<FiShield size={20}></FiShield>
+        case "layers":return<FiLayers size={20}></FiLayers>
+        case "gauge":return<FiInfo size={20}></FiInfo>
+        case "droplet":return<FiDroplet size={20}></FiDroplet>
+        case "cpu":return<FiCpu size={20}></FiCpu>
+        case "clock":return<FiClock size={20}></FiClock>
+        case "disc":return<FiDisc size={20}></FiDisc>
+        case "box":return<FiBox size={20}></FiBox>
+        case "package":return<FiPackage size={20}></FiPackage>
+        case "hash":return<FiHash size={20}></FiHash>
+    }
+};
     
 
 
@@ -215,6 +233,25 @@ function ProductDetailsPage(){
             <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-20">
                             Всички характеристики на продукта
             </h1>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-10">
+  {product.specifications?.map((spec, index) => (
+    <div 
+      key={index} 
+      className="bg-[#235347] rounded-full px-6 py-3 flex items-center justify-between text-white border border-[#DAF1DE]/20 hover:border-[#DAF1DE]/60 transition-all"
+    >
+      <div className="flex items-center gap-2">
+        {renderIcon(spec.icon)}
+        <span className="uppercase tracking-wide font-extrabold text-sm">
+          {spec.label}
+        </span>
+      </div>
+
+      <span className="font-medium text-sm text-[#DAF1DE]">
+        {spec.value}
+      </span>
+    </div>
+  ))}
+</div>
         </div>
 
         </div>
