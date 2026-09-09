@@ -230,38 +230,47 @@ function ProductDetailsPage(){
                 </div>
                 
             </div>
-            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-40 pt-10 border-t border-[#DAF1DE]/25">
+            <h1 className="text-3xl  font-extrabold text-[#DAF1DE] text-center uppercase mt-40">
                             Пълно описание на продукта
             </h1>
-            <p className="text-md text-gray-300 mt-10">
+
+                 <div className="mt-10 text-center">
+            <p className="text-base leading-relaxed text-gray-300 font-light max-w-4xl mx-auto bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-3xl p-8 backdrop-blur-md shadow-xl text-center">
                             {product.description}
                         </p>
-            
-            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-20 pt-10 border-t border-[#DAF1DE]/25">
+                 </div>
+
+                 <div className="mt-32 ">
+            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mb-8">
                             Всички характеристики на продукта
             </h1>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto ">
             {product.specifications?.map((spec, index) => (
                 <div 
                 key={index} 
-                className="bg-[#235347] rounded-full px-6 py-3 flex items-center justify-between text-white border border-[#DAF1DE]/20 hover:border-[#DAF1DE]/60 transition-all"
+                className="bg-[#163B32]/30 border border-[#DAF1DE]/15 hover:border-[#DAF1DE]/40 rounded-2xl px-6 py-4 flex items-center justify-between backdrop-blur-md transition-all"
                 >
-                <div className="flex items-center gap-2">
+
+                    <div className="flex items-center gap-3 text-[#DAF1DE]/70 transition-colors">
+                <span className="p-2 rounded-xl  bg-[#051F20]/50 border border-[#DAF1DE]/10 text-[#10B981]">
                     {renderIcon(spec.icon)}
-                    <span className="uppercase tracking-wide font-extrabold text-sm">
+                    
+                </span>
+                <span className="uppercase tracking-wide font-semibold text-xs text-gray-300">
                     {spec.label}
                     </span>
                 </div>
 
-                <span className="font-medium text-sm text-[#DAF1DE]">
+                <span className="font-bold text-sm text-[#DAF1DE]">
                     {spec.value}
                 </span>
                 </div>
             ))}
             </div>
+            </div>
 
 
-            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-20 pt-10 border-t border-[#DAF1DE]/25">
+            <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mt-40 ">
                             Разгледайте още подобни продукти
             </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
