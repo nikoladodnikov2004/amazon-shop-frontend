@@ -36,7 +36,7 @@ function ReviewSection({productId}:{productId:string | number}){
 
         <div className="mt-20">
             <div className="grid grid-cols-2 items-center justify-center gap-5">
-                <div className="bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-3xl p-8 ">
+                <div className="bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-3xl p-8 h-full">
                     <div className="items-center flex flex-col justify-center">
                         <span className="font-extrabold text-4xl text-[#DAF1DE] tracking-tight border rounded-lg px-4 py-3 border-[#DAF1DE]/10 bg-[#051F20]/50 shadow-md">4.2</span>
                         
@@ -51,7 +51,7 @@ function ReviewSection({productId}:{productId:string | number}){
                         <div className="border border-b w-full my-6 border-[#DAF1DE]/30"></div>
                     </div>
                      {[5, 4, 3, 2, 1].map((rowCount) => (
-                    <div key={rowCount} className="flex items-center gap-2 ">
+                    <div key={rowCount} className="flex items-center gap-5">
 
                                 <div className="flex gap-1 my-1">
                                 {[1, 2, 3, 4, 5].map((starIndex) => (
@@ -60,12 +60,22 @@ function ReviewSection({productId}:{productId:string | number}){
                                     className={`size-5 ${
                                         starIndex <= rowCount
                                         ? "fill-[#D4AF37] text-[#DAF1DE]" 
-                                        : "text-[#DAF1DE]/30"              
+                                        : "text-[#DAF1DE]/30" 
+                                        
                                     }`}
                                     />
+                                    
+                                    
                                 ))}
+                                
                                 </div>
 
+                                <div className="h-3 w-full overflow-hidden rounded-full bg-white/10">
+                                    <div className="h-full rounded-full bg-[#DAF1DE] transition-all duration-500"
+                                        style={{width:"50%"}}
+                                    ></div>
+                                </div>
+                                    <span className="font-bold tracking-tighter w-10 text-sm text-[#DAF1DE]">50%</span>
                             
                             </div>
                             ))}
@@ -115,7 +125,7 @@ function ReviewSection({productId}:{productId:string | number}){
                 </div>
                 </div>
                                         
-                <div className="bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-3xl p-8 h-full">
+                <div className="bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-3xl p-8 h-full w-full">
                                
 
                 </div>
