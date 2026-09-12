@@ -1,6 +1,7 @@
 import {FiStar} from "react-icons/fi";
 import { useState, useEffect } from 'react';
 import {TiDelete} from "react-icons/ti";
+import ReviewCard from "./ReviewCard";
 
 interface Review{
         _id:string;
@@ -10,7 +11,29 @@ interface Review{
         createdAt:string;
      }
 function ReviewSection({productId}:{productId:string | number}){
-    const [reviews, setReviews]=useState<Review[]>([])
+    const [reviews, setReviews] = useState<Review[]>([
+    {
+        _id: "1",
+        productId: "101",
+        rating: 5,
+        comment: "Изключително качество! Ползвам го всеки ден и съм предоволен от покупката.",
+        createdAt: "2026-09-08T10:30:00.000Z"
+    },
+    {
+        _id: "2",
+        productId: "101",
+        rating: 4,
+        comment: "Много добър продукт за цената си. Доставката беше супер бърза.",
+        createdAt: "2026-09-09T14:15:00.000Z"
+    },
+    {
+        _id: "3",
+        productId: "101",
+        rating: 5,
+        comment: "Надмина очакванията ми. Дизайнът и изработката са топ!",
+        createdAt: "2026-09-10T09:00:00.000Z"
+    }
+]);
     const [loading, setLoading]=useState<boolean>(true);
 
     useEffect(() => {
@@ -30,7 +53,17 @@ function ReviewSection({productId}:{productId:string | number}){
      const [comment, setComment]=useState('');   
      const [rating, setRating]=useState<number>(0);  
       
-
+const handleDelete = (id: string) => {
+    fetch(`http://localhost:5000/api/reviews/${id}`, {
+        method: "DELETE",
+    })
+    .then((res) => {
+        if (res.ok) {
+            setReviews((prev) => prev.filter((review) => review._id !== id));
+        }
+    })
+    .catch((err) => console.error("Грешка при изтриване:", err));
+};
     return(
 
 
@@ -106,7 +139,7 @@ function ReviewSection({productId}:{productId:string | number}){
                                 <button
                                 type="button"
                                 onClick={() =>setRating(0)}
-                                className="ml-2"
+                                className="ml-2 text-[#DAF1DE]/30 hover:text-red-400 transition-colors cursor-pointer"
                                 ><TiDelete size={30}></TiDelete>
                                 </button>
                      </div>
@@ -125,13 +158,24 @@ function ReviewSection({productId}:{productId:string | number}){
                 </div>
                 </div>
                                         
-                <div className="bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-3xl p-8 h-full w-full">
-                               
-
-                </div>
+                
             </div>
 
-                                
+            <div className="mt-10">
+    <h3 className="text-[#DAF1DE] text-xl font-extrabold tracking-tighter uppercase mb-6 text-center">
+        Виж какво мислят останалите за този продукт
+    </h3>
+
+    <div className="flex flex-row gap-4 items-center justify-center">
+        {reviews.map((rev) => (
+            <ReviewCard 
+                key={rev._id} 
+                review={rev} 
+                onDelete={handleDelete} 
+            />
+        ))}
+    </div>
+</div>                    
 
         </div>
 
