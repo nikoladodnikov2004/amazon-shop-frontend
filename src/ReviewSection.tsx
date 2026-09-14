@@ -106,7 +106,9 @@ const handleDelete = (id: string) => {
                         <span className="font-extrabold text-2xl text-[#DAF1DE] tracking-tight mt-1">Среден рейтинг на този продукт</span>
                         <div className="border border-b w-full my-6 border-[#DAF1DE]/30"></div>
                     </div>
-                     {[5, 4, 3, 2, 1].map((rowCount) => (
+                     {[5, 4, 3, 2, 1].map((rowCount) => {
+                        const percentage =getRatingPercentage(rowCount);
+                        return(
                     <div key={rowCount} className="flex items-center gap-5">
 
                                 <div className="flex gap-1 my-1">
@@ -128,13 +130,14 @@ const handleDelete = (id: string) => {
 
                                 <div className="h-3 w-full overflow-hidden rounded-full bg-white/10">
                                     <div className="h-full rounded-full bg-[#DAF1DE] transition-all duration-500"
-                                        style={{width:"50%"}}
+                                        style={{width:`${percentage}%`}}
                                     ></div>
                                 </div>
-                                    <span className="font-bold tracking-tighter w-10 text-sm text-[#DAF1DE]">50%</span>
+                                    <span className="font-bold tracking-tighter w-10 text-sm text-[#DAF1DE]">{percentage}%</span>
                             
                             </div>
-                            ))}
+                        );
+                            })}
 
                 </div>
                 <div className="items-center flex flex-col justify-center">
