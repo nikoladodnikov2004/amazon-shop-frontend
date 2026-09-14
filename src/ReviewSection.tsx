@@ -2,6 +2,8 @@ import {FiStar} from "react-icons/fi";
 import { useState, useEffect } from 'react';
 import {TiDelete} from "react-icons/ti";
 import ReviewCard from "./ReviewCard";
+import {useAuth} from "./context/AuthContext";
+import api from "./api/axios";
 
 interface Review{
         _id:string;
@@ -77,6 +79,52 @@ const handleDelete = (id: string) => {
     const averageRating = totalReviews > 0
         ? (reviews.reduce((acc, r) => acc + r.rating, 0) / totalReviews).toFixed(1)
         : "0.0";
+
+    const { user, token, isAuthenticated } = useAuth();
+
+    const handleSubmit = async (e:React.FormEvent) =>{
+        e.preventDefault();
+
+        if(!isAuthenticated){
+            alert("Трябва да сте влезли в профила си, за да оставите отзив!");
+            return;
+        }
+
+        if(rating===0){
+            alert("Моля, изберете оценка от 1 до 5 звезди.");
+            return;
+        }
+
+        if(!comment.trim()){
+            alert("Моля, напишете коментар.");
+            return;
+        }
+
+        try {
+            const response = await api.post(
+                '/reviews',
+                {
+                productId,
+                rating,
+                comment,
+                userId: user?.id,
+                },
+                {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+
+            );
+
+            setReviews((prev) => [response.data, ...prev]);
+
+            setComment('');
+            setRating(0);
+        } catch (error){
+            console.error("Грешка при изпращане на отзива:", error);
+        }
+    };
 
     return(
 
@@ -172,14 +220,17 @@ const handleDelete = (id: string) => {
                      
                      
                      <span className="text-DAF1DE text-xl font-extrabold tracking-tighter uppercase">Оставете вашия отзив за продукта</span>
-                     <form className="mt-5">
+                     <form onSubmit={handleSubmit} className ="mt-5">
                         <textarea
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         placeholder="Оставете вашия отзив тук..."
                         className="tracking-tight font-semibold bg-[#051F20] border border-[#163B32] p-8 w-full rounded-xl resize-none text-gray-300"
                         />
-                        <button type="submit" className='w-full py-4 mt-4 rounded-xl bg-[#235347] text-[#DAF1DE] hover:bg-[#163B32] transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)] border border-[#8EB69B]/20 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer uppercase font-bold tracking-tighter'>Добави ревю</button>
+                        <button 
+                        type="submit"
+                        
+                        className='w-full py-4 mt-4 rounded-xl bg-[#235347] text-[#DAF1DE] hover:bg-[#163B32] transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)] border border-[#8EB69B]/20 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer uppercase font-bold tracking-tighter'>Добави ревю</button>
                      </form>
                 </div>
                 </div>
