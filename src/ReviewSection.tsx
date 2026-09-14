@@ -23,14 +23,14 @@ function ReviewSection({productId}:{productId:string | number}){
         _id: "2",
         productId: "101",
         rating: 4,
-        comment: "Много добър продукт за цената си. Доставката беше супер бърза.",
+        comment: "Много добър продукт за цената си. Доставката беше супер бърза и съм изключително доволна.",
         createdAt: "2026-09-09T14:15:00.000Z"
     },
     {
         _id: "3",
         productId: "101",
         rating: 5,
-        comment: "Надмина очакванията ми. Дизайнът и изработката са топ!",
+        comment: "Надмина очакванията ми. Дизайнът и изработката са топ! Изключително съм доволна.",
         createdAt: "2026-09-10T09:00:00.000Z"
     }
 ]);
@@ -192,7 +192,7 @@ const handleDelete = (id: string) => {
         Виж какво мислят останалите за този продукт
     </h3>
 
-    <div className="flex flex-row gap-4 items-center justify-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {reviews.map((rev) => (
             <ReviewCard 
                 key={rev._id} 
