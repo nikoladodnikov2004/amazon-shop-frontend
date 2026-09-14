@@ -1,7 +1,6 @@
 import React, {createContext, useContext, useState, useEffect} from "react";
 import api from "../api/axios";
-import { LogOut } from "lucide-react";
-import { data } from "react-router-dom";
+
 
 interface User{
     id:number;
@@ -13,7 +12,7 @@ interface User{
 interface AuthContextType {
     user: User | null;
     token: string | null;
-    login: (email: string, pass: string) => Promise<void>;
+    login: (email: string, password: string) => Promise<void>;
     register: (data: {firstName: string; lastName: string; email: string; password:string;}) => Promise<void>;
     logout: () => void;
     isAuthenticated: boolean;
@@ -22,39 +21,61 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{children: React.ReactNode}> =({ children}) => {
-    const [user, setUser]=useState<User | null>(null);
+    const [user, setUser]=useState<User | null>(() => {
+        const savedUser=localStorage.getItem('user');
+        return savedUser ? JSON.parse(savedUser) : null;
+    });
+
+
+
     const [token, setToken]=useState<string | null>(localStorage.getItem('token'));
-    
+    const [loading, setLoading] = useState<boolean>(true);
+
     useEffect(() => {
-        if(token){
-            api.get('/auth/me')
-            .then((res) => setUser(res.data))
-            .catch(() => logout());
+        const fetchMe = async () => {    
+         const storedToken = localStorage.getItem('token');   
+        if(storedToken){
+            try{
+            const res = await api.get('/auth/me');
+            setUser(res.data);
+            localStorage.setItem('user', JSON.stringify(res.data));
+            }catch(error){
+                console.error("Невалиден токен, излизане...", error);
+                logout();
+            }
         }
+        setLoading(false);
+        };
+        fetchMe();
     }, [token]);
 
     const login =async (email: string, password: string ) => {
         const response = await api.post('/auth/login', {email, password});
-        const {token: jwtToken, user: userData} = response.data;
+        const jwtToken = response.data.token || response.data.Token;
 
         localStorage.setItem('token', jwtToken);
         setToken(jwtToken);
-        setUser(userData);
+        
+        try {
+            const userRes = await api.get('/auth/me');
+            setUser(userRes.data);
+            localStorage.setItem('user', JSON.stringify(userRes.data));
+        } catch (error){
+            console.error("Грешка при изтегляне на профила след вход:", error);
+        }
     };
 
     const logout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         setToken(null);
         setUser(null);
     };
 
     const register =async (data: {firstName: string; lastName: string; email: string, password: string }) => {
-        const response = await api.post('/auth/register', data);
-        const {token: jwtToken, user: userData} = response.data;
-
-        localStorage.setItem('token', jwtToken);
-        setToken(jwtToken);
-        setUser(userData);
+         await api.post('/auth/register', data);
+        
+        await login(data.email, data.password);
     };
 
     return (
