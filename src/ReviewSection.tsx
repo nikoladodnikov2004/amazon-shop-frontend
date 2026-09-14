@@ -85,15 +85,24 @@ const handleDelete = (id: string) => {
             <div className="grid grid-cols-2 items-center justify-center gap-5">
                 <div className="bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-3xl p-8 h-full">
                     <div className="items-center flex flex-col justify-center">
-                        <span className="font-extrabold text-4xl text-[#DAF1DE] tracking-tight border rounded-lg px-4 py-3 border-[#DAF1DE]/10 bg-[#051F20]/50 shadow-md">4.2</span>
+                        <span className="font-extrabold text-4xl text-[#DAF1DE] tracking-tight border rounded-lg px-4 py-3 border-[#DAF1DE]/10 bg-[#051F20]/50 shadow-md">{averageRating}</span>
                         
-                        <div className="flex items-center gap-1 mt-2 text-2xl">
-                            <FiStar className="fill-[#D4AF37]"></FiStar>
-                            <FiStar className="fill-[#D4AF37]"></FiStar>
-                            <FiStar className="fill-[#D4AF37]"></FiStar>
-                            <FiStar className="fill-[#D4AF37]"></FiStar>
-                            <FiStar className="fill-[#D4AF37]"></FiStar>
-                        </div>
+                        <div className="flex items-center gap-1 my-2">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                    <FiStar
+                                    key={star}
+                                    className={`size-6 ${
+                                        star <= Math.round(Number(averageRating))
+                                        ? "fill-[#D4AF37] text-[#DAF1DE]" 
+                                        : "text-[#DAF1DE]/30" 
+                                        
+                                    }`}
+                                    />
+                                    
+                                    
+                                ))}
+                                
+                                </div>
                         <span className="font-extrabold text-2xl text-[#DAF1DE] tracking-tight mt-1">Среден рейтинг на този продукт</span>
                         <div className="border border-b w-full my-6 border-[#DAF1DE]/30"></div>
                     </div>
