@@ -63,7 +63,21 @@ const handleDelete = (id: string) => {
         }
     })
     .catch((err) => console.error("Грешка при изтриване:", err));
+     setReviews((prev) => prev.filter((review) => review._id !== id));
 };
+    const totalReviews=reviews.length;
+
+    const getRatingPercentage =(starRating: number) => {
+        if(totalReviews === 0) return 0;
+        const count = reviews.filter((r) => r.rating ===starRating).length;
+        return Math.round((count/totalReviews)*100);
+
+    };
+
+    const averageRating = totalReviews > 0
+        ? (reviews.reduce((acc, r) => acc + r.rating, 0) / totalReviews).toFixed(1)
+        : "0.0";
+
     return(
 
 
