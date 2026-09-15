@@ -45,7 +45,9 @@ function ReviewCard({review, onDelete}:ReviewCardProps){
                                         
                  </div>
                  <div className="">
-                    <span className="text-[#DAF1DE] tracking-tighter text-lg font-semibold">{review.comment}</span>
+                    <p className="text-[#DAF1DE] text-sm font-medium leading-relaxed my-3 line-clamp-3 overflow-hidden">
+                    "{review.comment}"
+                    </p>
                  </div>
                  <div className="border-0.5 border-b my-3 border-[#DAF1DE]/20"></div>
                     <div className="flex items-center justify-between">
