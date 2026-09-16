@@ -6,7 +6,7 @@ import {FiStar, FiThumbsUp} from "react-icons/fi";
 
 export interface ReviewCardProps {
     review:{
-    _id:string;
+    id:string;
     rating:number;
     comment:string;
     createdAt:string;
@@ -21,7 +21,7 @@ function ReviewCard({review, onDelete}:ReviewCardProps){
     <div className="bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-2xl p-10 backdrop-blur-md transition-all hover:border-[#DAF1DE]/30 ">
         <button
         type="button"
-        onClick={() =>onDelete(review._id)}
+        onClick={() =>onDelete(review.id)}
         className="absolute top-3 right-3 text-[#DAF1DE]/30 hover:text-red-400 transition-colors cursor-pointer"
         >
             <TiDelete size={22}></TiDelete>
