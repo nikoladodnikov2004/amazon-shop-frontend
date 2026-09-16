@@ -6,43 +6,29 @@ import {useAuth} from "./context/AuthContext";
 import api from "./api/axios";
 
 interface Review{
-        _id:string;
+        id:string;
         productId:string;
         rating:number;
         comment:string;
         createdAt:string;
      }
-function ReviewSection({productId}:{productId:string | number}){
-    const [reviews, setReviews] = useState<Review[]>([
-    {
-        _id: "1",
-        productId: "101",
-        rating: 5,
-        comment: "Изключително качество! Ползвам го всеки ден и съм предоволен от покупката.",
-        createdAt: "2026-09-08T10:30:00.000Z"
-    },
-    {
-        _id: "2",
-        productId: "101",
-        rating: 4,
-        comment: "Много добър продукт за цената си. Доставката беше супер бърза и съм изключително доволна.",
-        createdAt: "2026-09-09T14:15:00.000Z"
-    },
-    {
-        _id: "3",
-        productId: "101",
-        rating: 5,
-        comment: "Надмина очакванията ми. Дизайнът и изработката са топ! Изключително съм доволна.",
-        createdAt: "2026-09-10T09:00:00.000Z"
-    }
-]);
+interface ReviewSectionProps{
+    productId: string | number;
+}
+function ReviewSection({productId}: ReviewSectionProps){
+     const { user, token, isAuthenticated } = useAuth();
+    const numericProductId = Number(productId);
+
+    const [reviews, setReviews] = useState<Review[]>([]);
     const [loading, setLoading]=useState<boolean>(true);
+    const [comment, setComment]=useState('');   
+    const [rating, setRating]=useState<number>(0);  
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/reviews?productId=${productId}`)
-        .then((res) => res.json())
-        .then((data) => {
-            setReviews(data);
+        api.get(`/Review?productId=${numericProductId}`)
+        
+        .then((res) => {
+            setReviews(res.data);
             setLoading(false);
         })
     
@@ -50,22 +36,23 @@ function ReviewSection({productId}:{productId:string | number}){
         console.error("Грешка при зареждане на отзивите:", err);
         setLoading(false);
     });
-}, [productId]);
+}, [numericProductId]);
 
-     const [comment, setComment]=useState('');   
-     const [rating, setRating]=useState<number>(0);  
+     
       
 const handleDelete = (id: string) => {
-    fetch(`http://localhost:5000/api/reviews/${id}`, {
-        method: "DELETE",
-    })
-    .then((res) => {
-        if (res.ok) {
-            setReviews((prev) => prev.filter((review) => review._id !== id));
+    api.delete(`/Review/${id}`, {
+        headers: {
+            Authorization:`Bearer ${token}`
         }
     })
+    .then(() => {
+        
+        setReviews((prev) => prev.filter((review) => review.id !== id));
+        
+    })
     .catch((err) => console.error("Грешка при изтриване:", err));
-     setReviews((prev) => prev.filter((review) => review._id !== id));
+     
 };
     const totalReviews=reviews.length;
 
@@ -80,7 +67,7 @@ const handleDelete = (id: string) => {
         ? (reviews.reduce((acc, r) => acc + r.rating, 0) / totalReviews).toFixed(1)
         : "0.0";
 
-    const { user, token, isAuthenticated } = useAuth();
+   
 
     const handleSubmit = async (e:React.FormEvent) =>{
         e.preventDefault();
@@ -102,12 +89,12 @@ const handleDelete = (id: string) => {
 
         try {
             const response = await api.post(
-                '/reviews',
+                `/Review/${numericProductId}`,
                 {
-                productId,
+                
                 rating,
                 comment,
-                userId: user?.id,
+                
                 },
                 {
                     headers:{
@@ -191,7 +178,7 @@ const handleDelete = (id: string) => {
                 <div className="items-center flex flex-col justify-center">
                     
                 <div className="bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-3xl p-8 w-full ">
-                <span className="text-DAF1DE text-xl font-extrabold tracking-tighter uppercase">Дайте вашата оценка за този продукт</span>
+                <span className="text-[#DAF1DE] text-xl font-extrabold tracking-tighter uppercase">Дайте вашата оценка за този продукт</span>
                      <div className="flex gap-2 items-center">
                         {[1, 2, 3, 4, 5].map((star) => (
                             <button
@@ -219,7 +206,7 @@ const handleDelete = (id: string) => {
                      </div>
                      
                      
-                     <span className="text-DAF1DE text-xl font-extrabold tracking-tighter uppercase">Оставете вашия отзив за продукта</span>
+                     <span className="text-[#DAF1DE] text-xl font-extrabold tracking-tighter uppercase">Оставете вашия отзив за продукта</span>
                      <form onSubmit={handleSubmit} className ="mt-5">
                         <textarea
                         value={comment}
@@ -246,7 +233,7 @@ const handleDelete = (id: string) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {reviews.map((rev) => (
             <ReviewCard 
-                key={rev._id} 
+                key={rev.id} 
                 review={rev} 
                 onDelete={handleDelete} 
             />
