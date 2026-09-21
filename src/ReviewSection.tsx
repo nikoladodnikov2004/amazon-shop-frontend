@@ -240,13 +240,22 @@ const handleDelete = (id: string) => {
         ))}
     </div>
 </div>                    
-
+{reviews.length=== 0 ? (
+        <div className="flex items-center justify-center bg-[#072E30] text-center rounded-xl border border-[#10B981]/20 p-8 my-6">
+            <h3 className="text-[#DAF1DE]/70 uppercase tracking-tighter font-bold text-xl">Все още няма отзиви за този продукт</h3>
+        </div>
+    ) : (
+        <div>
+            {reviews.map((review) => (
+      <ReviewCard key={review.id} review={review} onDelete={handleDelete}  />
+    ))}
+        </div>
+    )}
         </div>
 
 
     )
 
-
-
+    
 }
 export default ReviewSection;
