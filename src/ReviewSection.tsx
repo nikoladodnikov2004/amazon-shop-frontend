@@ -1,4 +1,4 @@
-import {FiStar} from "react-icons/fi";
+import {FiStar, FiMessageSquare} from "react-icons/fi";
 import { useState, useEffect } from 'react';
 import {TiDelete} from "react-icons/ti";
 import ReviewCard from "./ReviewCard";
@@ -226,16 +226,27 @@ const handleDelete = (id: string) => {
             </div>
 
             <div className="mt-10">
-    <h3 className="text-[#DAF1DE] text-xl font-extrabold tracking-tighter uppercase mb-6 text-center">
-        Виж какво мислят останалите за този продукт
-    </h3>
+    
 
 
                   
 {reviews.length=== 0 ? (
-        <div className="flex items-center justify-center bg-[#072E30] text-center rounded-xl border border-[#10B981]/20 p-8 my-6">
-            <h3 className="text-[#DAF1DE]/70 uppercase tracking-tighter font-bold text-xl">Все още няма отзиви за този продукт</h3>
+        <div className="flex flex-col items-center justify-center bg-gradient-to-b from-[#163B32]/30 to-[#051F20]/50 border border-[#DAF1DE]/15 text-center rounded-xl  p-8 my-6">
+            
+            <span className="relative mb-4 font-extrabold text-4xl text-[#DAF1DE] tracking-tight border rounded-lg px-4 py-3 border-[#DAF1DE]/10 bg-[#051F20]/50 shadow-md">
+            <FiMessageSquare className="size-10 text-[#DAF1DE]/80"></FiMessageSquare>
+            <FiStar className="absolute size-5 -top-1 -right-1 animate-bounce fill-[#D4AF37]"></FiStar>   
+           </span>
+            <h4 className="text-[#DAF1DE] font-black uppercase tracking-tight font-bold text-2xl mb-4">Бъдете първият, който ще сподели мнение!</h4>
+            <p className="text-[#DAF1DE]/80 max-w-md text-sm font-medium leading-relaxed"> Този продукт все още няма отзиви. Вашето мнение е изключително ценно и ще помогне на другите клиенти да направят своя избор.</p>
+
+            <div className="mt-5 bg-transparent border border-[#D4AF37]/60 rounded-full px-4 py-2 shadow-md">
+                <p className="text-[#D4AF37]/80 font-bold tracking-tighter text-md">Попълнете формата по горе</p>
+            </div>
         </div>
+
+        
+        
     ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
             {reviews.map((review) => (
