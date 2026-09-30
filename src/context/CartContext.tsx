@@ -148,7 +148,9 @@ return (
 
 export const useCart = () => {
     const context = useContext(CartContext);
-    
+    if (!context) {
+    throw new Error("useCart трябва да се използва вътре в CartProvider");
+  }
     return context;
 
 };
