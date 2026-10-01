@@ -43,14 +43,24 @@ export const CartProvider: React.FC<{children: React.ReactNode}> =({children})=>
     const {isAuthenticated}=useAuth();
 
 
+    
+    const fetchCart = async () =>{
+        try{
+            setLoading(true);
+            const data = await cartService.getCart();
+            setCartItems(data || []);
+        } catch (err){
+            console.error("Грешка при зареждане на количката:", err);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
+
     useEffect(()=>{
         if(isAuthenticated){
-            setLoading(true);
-            cartService
-            .getCart()
-            .then((data)=>setCartItems(data))
-            .catch((err) => console.error("Грешка при зареждане на количката:", err))
-            .finally(() => setLoading(false));
+            fetchCart();
         }else{
             setCartItems([])
         }
@@ -58,17 +68,10 @@ export const CartProvider: React.FC<{children: React.ReactNode}> =({children})=>
 
     const addToCart = async (productId:number, quantity: number = 1) =>{
         try{
-            const updatedItem = await cartService.addToCart(productId, quantity);
+            await cartService.addToCart(productId, quantity);
             
-            setCartItems((prev) => {
-                const index = prev.findIndex((item) => item.productId === productId);
-                if(index > -1){
-                    const newCart = [...prev];
-                    newCart[index] = updatedItem;
-                    return newCart;
-                }
-                return [...prev, updatedItem];
-        });
+           await fetchCart();
+        
         setIsOpen(true);
     } catch (err){
         console.error("Грешка при добавяне в количката:", err);
