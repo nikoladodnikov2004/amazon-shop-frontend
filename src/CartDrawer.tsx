@@ -3,19 +3,19 @@ import {TiDelete, TiShoppingBag} from "react-icons/ti";
 import {FiShoppingCart} from "react-icons/fi";
 import { TbShoppingCartOff} from "react-icons/tb";
 import { VscChromeClose } from "react-icons/vsc";
-
+import CartItemCard from "./CartItemCardtemp.tsx"
+import {useCart} from "./context/CartContext.tsx"
 
 interface CartDrawerProps {
     isOpen:boolean;
     onClose: () => void;
-    cartItems?: any[];
-    onRemoveFromCart?: (id:number) => void;
+    
 }
 
-function CartDrawer ({isOpen, onClose, cartItems =[], onRemoveFromCart}:CartDrawerProps){
+function CartDrawer ({isOpen, onClose}:CartDrawerProps){
 
     
-    const totalPrice = cartItems.reduce((acc,item) => acc + (item.price * (item.quantity || 1)), 0);
+    const {cartItems, totalPrice} = useCart();
 
 
 
@@ -55,6 +55,8 @@ function CartDrawer ({isOpen, onClose, cartItems =[], onRemoveFromCart}:CartDraw
            
            </div>
                
+           {cartItems.length===0?(
+            
            
             <div className="flex flex-col items-center justify-center">
             <div className="mt-[50%] text-[#DAF1DE]/60 bg-gradient-to-b from-[#163B32]/30 to-[#051F20]/50 border border-[#10B981]/40 rounded-2xl px-7 py-5">
@@ -65,6 +67,17 @@ function CartDrawer ({isOpen, onClose, cartItems =[], onRemoveFromCart}:CartDraw
            <button type="submit" className='mt-4 w-full max-w-[70%] py-4 rounded-xl hover:bg-[#DAF1DE] hover:text-[#235347] bg-[#10B981]/50 transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)]  transform cursor-pointer uppercase font-extrabold tracking-tighter text-sm text-[#DAF1DE]'>Разгледай нашите категории</button>
            </div>
 
+           ) : (
+            <div className="flex flex-col gap-3 px-4 max-h-[calc(100vh-220px)] overflow-y-auto">
+                
+                    {cartItems.map((cartItem) => (
+                        <CartItemCard key={cartItem.id || cartItem.productId} cartItem={cartItem}></CartItemCard>
+                    ))}
+                
+
+            </div>
+)}
+            
            
         </div>   
                               
