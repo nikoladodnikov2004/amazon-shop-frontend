@@ -20,6 +20,7 @@ function CategorySection(){
                 <h1 className='text-2xl text-[#DAF1DE] font-extrabold tracking-wide mt-1 uppercase'>
                     Новите ни категории
                 </h1>
+                
             </div>
             
         <div className="flex items-center justify-center gap-8 flex-wrap px-4">

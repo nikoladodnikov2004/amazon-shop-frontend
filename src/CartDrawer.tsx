@@ -5,6 +5,7 @@ import { TbShoppingCartOff} from "react-icons/tb";
 import { VscChromeClose } from "react-icons/vsc";
 import CartItemCard from "./CartItemCardtemp.tsx"
 import {useCart} from "./context/CartContext.tsx"
+import { FiPercent } from "react-icons/fi";
 
 interface CartDrawerProps {
     isOpen:boolean;
@@ -68,13 +69,46 @@ function CartDrawer ({isOpen, onClose}:CartDrawerProps){
            </div>
 
            ) : (
-            <div className="flex flex-col gap-3 px-4 max-h-[calc(100vh-220px)] overflow-y-auto">
+            <div className="flex flex-col gap-3 px-4 max-h-[calc(100vh-220px)] overflow-y-auto mt-4">
                 
                     {cartItems.map((cartItem) => (
                         <CartItemCard key={cartItem.id || cartItem.productId} cartItem={cartItem}></CartItemCard>
                     ))}
                 
+<div className="mt-8 flex flex-col">
+    
+        <h3 className=' text-lg uppercase font-extrabold text-[#DAF1DE] mb-2'>Код за отстъпка</h3>
+        <div className="flex items-center justify-between">
+        <input
+          
+          
+          
+          placeholder='Въведете вашия промокод'
+          
+          className='w-[65%] bg-[#051F20] border border-[#10B981]/30 rounded-2xl px-4 py-3.5 text-[#DAF1DE] placeholder-[#8EB69B]/40 focus:outline-none focus:border-[#8EB69B] focus:ring-1 focus:ring-[#8EB69B] transition-all'
+        />
+        <button className=" text-[#DAF1DE] font-bold bg-[#10B981]/70 p-3 rounded-2xl text-md w-[30%]">
+            Приложи
+        </button>
 
+        </div>
+        <div className="flex items-center justify-center mt-2 gap-2">
+        <FiPercent className="text-[#10B981]/70"></FiPercent>
+        <p className="text-gray-300/50 tracking-tighter text-sm font-semibold ">Тук може да въведете вашия код за допълнително намаление</p>
+      </div>
+      <div className="flex flex-col  mt-40 ">
+        <p className="uppercase font-extrabold tracking-tighter text-[#DAF1DE] text-lg">Вашата крайна поръчка</p>
+        <p className="text-sm text-gray-300/50 mt-2">Цена на количката:</p>
+        <p className="text-sm text-gray-300/50 mt-5">Цена за доставка:</p>
+        <p className="text-sm text-[#10B981]/70 mt-5 text-lg tracking-tighter uppercase font-extrabold">Обща цена:</p>
+        
+      </div>
+      </div>
+      <div className="justify-center items-center flex mt-4 ">
+      <button className=" text-[#DAF1DE] font-bold bg-[#10B981]/70 p-3 rounded-2xl text-md w-full ">
+            Приложи
+        </button>
+        </div>
             </div>
 )}
             

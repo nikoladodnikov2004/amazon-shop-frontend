@@ -196,7 +196,7 @@
 
 .swiper {
   
-  --swiper-pagination-color: #11676a;
+  --swiper-pagination-color: #DAF1DE;
 }
 
 .notched-banner {
@@ -221,3 +221,4 @@
     z-index: 10;
     pointer-events:none;
 }
+

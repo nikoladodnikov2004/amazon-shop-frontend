@@ -8,7 +8,7 @@ export const cartService = {
   },
 
   addToCart: async (productId: number, quantity: number = 1): Promise<CartItemDto> => {
-    const response = await api.post<CartItemDto>("/Cart/add", { productId, quantity });
+    const response = await api.post<CartItemDto>("/Cart", { productId, quantity });
     return response.data;
   },
 

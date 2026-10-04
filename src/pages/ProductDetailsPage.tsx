@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {sectionData} from "../data/productData";
 import {FiShoppingBag, FiHeart, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
-import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders, FiEdit, FiX, FiSave } from "react-icons/fi"
+import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders, FiEdit2, FiX, FiSave } from "react-icons/fi"
 import ProductCard from"./ProductCard";
 import ReviewSection from '../ReviewSection.tsx'
 
@@ -16,6 +16,12 @@ function ProductDetailsPage(){
     const [selectedImage, setSelectedImage]= useState(0);
     const [formData, setFormData] = useState<any>({});
     const isInputMode = isEditing || isAddNewProduct;
+    const STATUS_AVAILABLE = 'В наличност';
+    const STATUS_NOT_AVAILABLE = 'Няма в наличност';
+    const STATUS_COMING_SOON = 'Очаквайте скоро';
+    const[availabilityStatus, setAvailabilityStatus]=useState(STATUS_AVAILABLE)
+
+
     const renderIcon=(iconName?: string)=>
     {
         switch(iconName){
@@ -39,6 +45,12 @@ function ProductDetailsPage(){
 const handleChange= (field: string, value: any) => {
     setFormData((prev: any) => ({ ...prev, [field]: value}));
 
+};
+
+const handleFeatureChange = (index: number, value:string) => {
+    const updatedFeatures = [...(formData.features || [])]
+    updatedFeatures[index]= value;
+    handleChange('features', updatedFeatures);
 };
 
     const allProducts =sectionData
@@ -139,42 +151,58 @@ const handleChange= (field: string, value: any) => {
 
                 <div className="flex flex-col space-y-6">
                     <div>
-
+                            <div className="flex items-center">
                         <span className="text-xs font-bold text-[#10B981] uppercase tracking-wider">
                             {product.category}
                         </span>
+                                
+                            <div className="ml-4 text-gray-300 rounded-2xl">
+                                {!isEditing? (
                         <button
-  onClick={() => {
- 
-    setFormData({ ...product }); 
-    setIsEditing(true);
-  }}
-  className="bg-[#10B981] text-white font-bold py-2 px-4 rounded-xl ml-4"
->
-  <FiEdit size={20}></FiEdit>
-</button>
+                        
+            onClick={() => {
+            
+                setFormData({ ...product }); 
+                setIsEditing(true);
+                
+            }}
+            className=" text-white font-bold py-2 px-4 rounded-xl"
+            >
+            <FiEdit2 size={20} className="hover:text-yellow-400 transition-colors duration-300"></FiEdit2>
+            </button>
 
-<button
-  onClick={() => {
- 
-    
-    setIsEditing(false);
-  }}
-  className="bg-[#10B981] text-white font-bold py-2 px-4 rounded-xl ml-4"
->
-  <FiX size={20}></FiX>
-</button>
+                ):(
+                    <>
+            <button
+            onClick={() => {
+            
+                
+                setIsEditing(false);
+            }}
+            className=" text-white font-bold py-2 px-4 rounded-xl "
+            >
+            <FiX size={20} className="hover:text-red-600 transition-colors duration-300"></FiX>
+            </button>
 
-<button
-  onClick={() => {
- 
-    
-    setIsEditing(false);
-  }}
-  className="bg-[#10B981] text-white font-bold py-2 px-4 rounded-xl ml-4"
->
-  <FiSave size={20}></FiSave>
-</button>
+            <button
+            onClick={() => {
+            
+                
+                setIsEditing(false);
+            }}
+            className=" text-white font-bold py-2 px-4 rounded-xl "
+            >
+            <FiSave size={20} className="hover:text-green-600 transition-colors duration-300"></FiSave>
+            </button>
+                </>
+                )}
+            </div>
+            </div>
+        
+
+
+
+                        
                             <div className="mb-4 flex gap-3">
                                 
   
@@ -185,7 +213,7 @@ const handleChange= (field: string, value: any) => {
                             type="text"
                             value={formData.name || ''}
                             onChange={(e) =>handleChange('name', e.target.value)}
-                            className="w-full bg-transparent  text-2xl font-extrabold text-[#DAF1DE] rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            className="w-full p-0 bg-transparent text-3xl font-extrabold text-[#DAF1DE] rounded-sm outline-none focus:border-[#10B981]"    
                             placeholder= "Име на продукта"
                             />
                         ) : (
@@ -200,7 +228,7 @@ const handleChange= (field: string, value: any) => {
                             type="text"
                             value={formData.brand || ''}
                             onChange={(e) =>handleChange('brand', e.target.value)}
-                            className="mt-1 w-full bg-transparent  text-sm font-extrabold text-[#DAF1DE] rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            className=" w-full bg-transparent text-sm font-extrabold text-[#DAF1DE] rounded-sm p-0 mt-5 outline-none focus:border-[#10B981]"    
                             placeholder= "Име на марката"
                             />
                         ) : (
@@ -214,7 +242,7 @@ const handleChange= (field: string, value: any) => {
                             type="text"
                             value={formData.serialNumber || ''}
                             onChange={(e) =>handleChange('serialNumber', e.target.value)}
-                            className="mt-1 w-full bg-transparent  text-sm font-extrabold text-[#DAF1DE] rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            className="w-full bg-transparent  text-sm font-extrabold text-[#DAF1DE] rounded-sm p-0 mt-2 outline-none focus:border-[#10B981]"    
                             placeholder= "Сериен номер"
                             />
                         ) : (
@@ -228,7 +256,7 @@ const handleChange= (field: string, value: any) => {
                             type="text"
                             value={formData.condition || ''}
                             onChange={(e) =>handleChange('condition', e.target.value)}
-                            className="mt-1 w-full bg-transparent  text-sm font-extrabold text-[#DAF1DE] rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            className=" w-full bg-transparent  text-sm font-extrabold text-[#DAF1DE] rounded-sm p-0 mt-2 outline-none focus:border-[#10B981]"    
                             placeholder= "Състояние на продукта"
                             />
                         ) : (
@@ -249,9 +277,9 @@ const handleChange= (field: string, value: any) => {
                                         {isInputMode ? (
                             <input
                             type="text"
-                            value={formData.feature || ''}
-                            onChange={(e) =>handleChange('feature', e.target.value)}
-                            className="mt-1 w-full bg-transparent  text-sm font-extrabold text-white rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            value={formData.features?.[index] ?? feature ?? ''}
+                            onChange={(e) =>handleFeatureChange(index, e.target.value)}
+                            className=" w-full bg-transparent text-sm text-gray-200 rounded-sm p-0 outline-none focus:border-[#10B981]"    
                             placeholder= "Характеристика на продукта"
                             />
                         ) : (
@@ -263,21 +291,76 @@ const handleChange= (field: string, value: any) => {
                         </div>
                         
                             <div className="grid grid-cols-1 lg:grid-cols-2 ">
+                                
                         <div className="flex items-center gap-8 mt-4 text-sm">
+                            
                             {isInputMode ? (
+                            <span className="text-[#10B981] flex items-center gap-1">
+                                <div className="rounded-2xl items-center flex gap-2  px-2 py-2">
+                                    <button
+                                type="button"
+                                title={STATUS_AVAILABLE}
+                                onClick={() => handleChange('availability', STATUS_AVAILABLE)}
+                                className={`p-1.5 rounded-lg transition-all ${
+                                    formData.availability === STATUS_AVAILABLE
+                                    ? 'bg-[#10B981] text-white shadow'
+                                    : 'text-gray-400 hover:text-[#10B981]'
+                                }`}
+                                >
+                                <FiCheck size={16} />
+                                </button>
+                                <button
+                                type="button"
+                                title={STATUS_NOT_AVAILABLE}
+                                onClick={() => handleChange('availability', STATUS_NOT_AVAILABLE)}
+                                className={`p-1.5 rounded-lg transition-all ${
+                                    formData.availability === STATUS_NOT_AVAILABLE
+                                    ? 'bg-red-500 text-white shadow'
+                                    : 'text-gray-400 hover:text-red-500'
+                                }`}
+                                >
+                                 <FiX  size={16}></FiX>
+                                 </button>
+                                 <button
+                                type="button"
+                                title={STATUS_COMING_SOON}
+                                onClick={() => handleChange('availability', STATUS_COMING_SOON)}
+                                className={`p-1.5 rounded-lg transition-all ${
+                                    formData.availability === STATUS_COMING_SOON
+                                    ? 'bg-amber-500 text-white shadow'
+                                    : 'text-gray-400 hover:text-amber-400'
+                                    
+                                }`}
+
+                                
+                                >
+                                 <FiClock size={16}></FiClock>
+                                 </button>
+                                 </div>
+                                
+                                
                             <input
                             type="text"
-                            value={formData.dateDelivery || ''}
-                            onChange={(e) =>handleChange('dateDelivery', e.target.value)}
-                            className="mt-1 w-full bg-transparent  text-sm font-extrabold text-white rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            value={formData.availability || ''}
+                            onChange={(e) =>handleChange('availability', e.target.value)}
+                            className={`bg-transparent  text-sm rounded-sm p-0 outline-none focus:border-[#10B981] ${    
+                            formData.availability === STATUS_NOT_AVAILABLE
+                            ? 'text-red-400'
+                            : formData.availability === STATUS_COMING_SOON
+                            ? 'text-amber-400'
+                            : 'text-[#10B981]'
+                            }`}
                             placeholder= "Наличност"
                             />
+                            </span>
                         ) : (
                             <span className="text-[#10B981] flex items-center gap-1">
                                 <FiCheck size={16}></FiCheck>
-                                В наличност
+                                {product.availability}
+                                
                             </span>
                         )}
+                         
                             
                             {isInputMode ? (
                                 <span className="text-[#DAF1DE] flex items-center gap-1">
@@ -287,7 +370,7 @@ const handleChange= (field: string, value: any) => {
                             type="text"
                             value={formData.dateDelivery || ''}
                             onChange={(e) =>handleChange('dateDelivery', e.target.value)}
-                            className="mt-1 w-full  bg-transparent  text-sm font-extrabold text-white rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            className=" bg-transparent  text-sm text-[#DAF1DE] rounded-sm p-0 outline-none focus:border-[#10B981]"    
                             placeholder= "Доставка"
                             />
                             </span>
@@ -313,11 +396,11 @@ const handleChange= (field: string, value: any) => {
                                 <FiBox size={26}></FiBox>
                                 <span className=" font-md text-[#163B32]">Още</span>
                                 <input
-                            type="number"
+                            type="text"
                             value={formData.inStock || ''}
                             onChange={(e) =>handleChange('inStock', e.target.value)}
-                            className="mt-1 w-[35%] bg-transparent border border-[#163B32] text-sm font-extrabold text-center rounded-xl p-2 mx-1 outline-none focus:border-[#10B981]"    
-                            placeholder= "Бройки в наличност"
+                            className=" bg-transparent font-extrabold text-center rounded-xl p-0 outline-none focus:border-[#10B981] w-[3.5%]"    
+                            
                             />
                             <span className=" text-[#163B32] font-extrabold">броя налични в нашия склад</span>
   </div>

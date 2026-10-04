@@ -1,3 +1,5 @@
+import { FiTag, FiHash, FiZap, FiShield, FiSliders } from "react-icons/fi"
+
 export const sectionData = [
   {
     id: 'coffee-culture',
@@ -5,84 +7,212 @@ export const sectionData = [
     title: 'ПРЕМИУМ КАФЕМАШИНИ И АКСЕСОАРИ',
     products: [
       {
-        id: 101,
+        id: 2,
         name: 'Еспресо машина Niesa Elite',
         category: 'Кафемашини',
+        brand: 'Niesa',
+        brandLogo: "/images/mstile-310x310.png",
+        condition: 'Ново',
+        serialNumber: 'NES-EXP-101-2026',
+        availability: 'В наличност',
+        inStock: 14,
         price: '899.00 €',
         oldPrice: '1050.00 €',
         rating: 4.9,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'HOT',
-        image: 'https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&q=80&w=600',
+        images:[
+          'https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&q=80&w=600',
+          'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000](https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000)',
+          'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000](https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000)',
+          'https://images.unsplash.com/photo-1509785307050-d4066910ec1e?q=80&w=1000](https://images.unsplash.com/photo-1509785307050-d4066910ec1e?q=80&w=1000)',
+          'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000](https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000)'
+        
+        ],
+        features: [
+          'Професионална помпа 15 bar за перфектно крема',
+          'Двоен бойлер от неръждаема стомана PID контрол',
+          'Вградена конусовидна мелачка с 15 степени',
+          'Дюза за пара за кадифена млечна пяна',
+          'Дигитален сензорен дисплей за лесна настройка'
+        ],
+        specifications: [
+  { label: "Марка", value: "Niesa", icon: "tag" },
+  { label: "Каталожен номер", value: "NES-EXP-101-2026", icon: "hash" },
+  { label: "Категория", value: "Еспресо машини", icon: "layers" },
+  { label: "Мощност", value: "1450 W", icon: "zap" },
+  { label: "Налягане", value: "15 bar", icon: "gauge" },
+  { label: "Капацитет на вода", value: "1.8 литра", icon: "droplet" },
+  { label: "Материал на бойлера", value: "Неръждаема стомана", icon: "cpu" },
+  { label: "Време за загряване", value: "25 секунди", icon: "clock" },
+  { label: "Цвят", value: "Тъмнозелен / Мат", icon: "disc" },
+  { label: "Размери (ШхДхВ)", value: "24 x 38 x 31 см", icon: "box" },
+  { label: "Тегло", value: "4.2 кг", icon: "package" },
+  { label: "Гаранция", value: "24 месеца", icon: "shield" }
+],
+        description: 'Превърнете дома си в истинска италианска кафетерия с Niesa Elite. Тази премиум еспресо машина комбинира професионална мощност с интуитивен интерфейс. Вградената мелачка осигурява винаги прясно смляно кафе с идеалната едрина, а двойният бойлер гарантира стабилна температура както за екстракция на еспресото, така и за разбиване на мляко. Подходяща както за начинаещи кафе ентусиасти, така и за опитни баристи.'
       },
       {
         id: 102,
-        name: 'Прецизна кафемелачка Mill Pro',
-        category: 'Кафе аксесоари',
+        name: 'Прецизна кафемелачка Mill',
+        category: 'Кафемашини',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-GRN-102-2026',
+        inStock: 22,
         price: '149.00 €',
         oldPrice: '180.00 €',
         rating: 4.8,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'NEW',
-        image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Стоманени титаниеви ножове 40мм',
+          '30 степени на смилане (от еспресо до френска преса)',
+          'Антистатична система срещу разпиляване',
+          'Микропрецизен дозатор по време',
+          'Тиха работа под 65dB'
+        ],
+        description: 'Mill Pro е перфектният спътник на всяка кафемашина. Създадена за максимална точност при смилането, тя запазва естествените аромати и масла на кафето благодарение на титаниевите си ножове, които не го прегряват. Корпусът от матиран алуминий придава елегантност, а ниското ниво на шум прави сутрешното приготвяне на кафе истинско удоволствие.'
       },
       {
         id: 103,
         name: 'Ръчна кафеварка French Press',
-        category: 'Аксесоари',
+        category: 'Кафемашини',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-FPR-103-2026',
+        inStock: 35,
         price: '45.00 €',
         oldPrice: null,
         rating: 4.7,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Боросиликатно термоустойчиво стъкло 1000ml',
+          'Филтърна система от неръждаема стомана с 4 нива',
+          'Ергономична дръжка без загряване',
+          'Подходяща и за приготвяне на студен чай',
+          'Лесно разглобяване и почистване в съдомиялна'
+        ],
+        description: 'Класическа френска преса, създадена за любителите на богатото и плътно кафе. Изработена от изключително устойчиво боросиликатно стъкло, тя издържа на високи температури и запазва вкусовите качества на напитката без чужди примеси. Мултифилтърната система спира дори най-фините частици за гладка и ароматна чаша кафе.'
       },
       {
         id: 104,
         name: 'Професионален тампер Wood',
-        category: 'Инструменти',
+        category: 'Кафемашини',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-TMP-104-2026',
+        inStock: 18,
         price: '35.00 €',
         oldPrice: '45.00 €',
         rating: 4.9,
+        dateDelivery:'От 09.07 до 11.07',
         badge: '-20%',
-        image: 'https://images.unsplash.com/photo-1584286595398-a59f21d313f5?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1584286595398-a59f21d313f5?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Стандартен диаметър 58mm',
+          'Основа от полирана стомана 304',
+          'Дръжка от естествено орехово дърво',
+          'Идеално балансирано тегло от 450g',
+          'Ергономична форма за равномерно натискане'
+        ],
+        description: 'Тамперът Niesa Wood е ключов аксесоар за постигане на перфектна екстракция. Балансираното тегло ви позволява да приложите точното налягане от 15kg без усилие. Естествената дървена дръжка осигурява комфортен захват и придава уникален естетически вид на вашата бариста зона.'
       },
       {
         id: 105,
         name: 'Електрическа кана Kettle Touch',
-        category: 'Кухненски уреди',
+        category: 'Кафемашини',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-KTL-105-2026',
+        inStock: 12,
         price: '89.00 €',
         oldPrice: '110.00 €',
         rating: 4.6,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f6?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f6?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Прецизен контрол на температурата (40°C - 100°C)',
+          'Тънък чучур Gooseneck за контролирано изливане',
+          'Поддържане на температурата до 60 минути',
+          'LED сензорен панел в основата',
+          'Капацитет 1.0 литър с бързо завиране'
+        ],
+        description: 'Създадена за любителите на Pour-over кафе и фини чайове, Kettle Touch предлага хирургическа прецизност при изливането на водата. Благодарение на Gooseneck чучура контролирате дебита на водната струя, а електронният контрол ви позволява да изберете идеалната температура за всеки вид напитка.'
       },
       {
         id: 106,
         name: 'Студено приготвяне Cold Brew Tower',
         category: 'Кафе уреди',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-CBT-106-2026',
+        inStock: 7,
         price: '129.00 €',
         oldPrice: null,
         rating: 4.8,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'NEW',
-        image: 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Бавно капково извличане с регулируем вентил',
+          'Капацитет 800ml за студено кафе',
+          'Дървена рамка от бамбук и боросиликатно стъкло',
+          'Филтър от фино микро-сетка без хартия',
+          'Изключително ниска киселинност на готовата напитка'
+        ],
+        description: 'Капковата кула Cold Brew Tower превръща приготвянето на студено кафе в истинско изкуство. Процесът на бавна екстракция (от 4 до 8 часа) извлича най-сладките и меки нотки на кафето, елиминирайки неприятната киселинност и горчивина. Едновременно уред за кафе и впечатляваща декорация за дома.'
       },
       {
         id: 107,
         name: 'Везни за кафе Scale Pro',
         category: 'Аксесоари',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-SCL-107-2026',
+        inStock: 25,
         price: '59.00 €',
         oldPrice: '75.00 €',
         rating: 4.9,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1509785307050-d4066910ec1e?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1509785307050-d4066910ec1e?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Прецизност на измерване до 0.1g',
+          'Вграден таймер за контрол на екстракцията',
+          'Презареждаща се литиево-йонна батерия през USB-C',
+          'Водоустойчива силиконова подложка',
+          'Скрит LED дисплей с високо съотношение на контраст'
+        ],
+        description: 'Контролирайте всеки грам и всяка секунда от вашето кафе с дигиталната везна Scale Pro. Благодарение на бързия си процесор, тя отчита теглото мигновено, а интегрираният хронометър ви помага да спазвате точните рецепти за еспресо или филтър кафе.'
       },
       {
         id: 108,
         name: 'Чаша за еспресо Ceramic Set',
         category: 'Посуда',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-CUP-108-2026',
+        inStock: 40,
         price: '29.00 €',
         oldPrice: null,
         rating: 4.5,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Комплект от 2 броя чаши по 80ml',
+          'Ръчно изработена керамика с двойни стени',
+          'Задържа топлината без да изгаря ръцете',
+          'Уникална матирана текстура на повърхността',
+          ' Уникална матирана текстура на повърхността'
+        ],
+        description: 'Насладете се на двойно еспресо в стилните керамични чаши Niesa. Ръчната им изработка прави всеки чифт уникален, а двойните стени осигуряват перфектно задържане на температурата на напитката, като запазват външната част хладна при допир.'
       }
     ]
   },
@@ -95,81 +225,185 @@ export const sectionData = [
         id: 201,
         name: 'Робот Прахосмукачка Niesa S9 Pro',
         category: 'Умен дом',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-VAC-201-2026',
+        inStock: 9,
         price: '799.00 €',
         oldPrice: '920.00 €',
         rating: 4.9,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'TOP',
-        image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'LiDAR лазерна навигация 3D сканиране',
+          'Всмукателна мощност от 6000 Pa',
+          'Вибриращ моп с автоматично повдигане при килими',
+          'Автономност до 180 минути (батерия 5200mAh)',
+          'Управление през мобилно приложение и гласови асистенти'
+        ],
+        description: 'Niesa S9 Pro е революция в автоматичното почистване. Оборудвана с най-новата лазерна навигация LiDAR, прахосмукачката картографира дома ви с милиметрова точност и избягва препятствия в реално време. Огромната всмукателна мощност от 6000 Pa премахва прах и отпадъци от дълбочината на килимите.'
       },
       {
         id: 202,
         name: 'Вертикална безкабелна V12 Slim',
         category: 'Вертикални',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-VSL-202-2026',
+        inStock: 15,
         price: '420.00 €',
         oldPrice: '480.00 €',
         rating: 4.8,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'NEW',
-        image: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Олекотен дизайн само 1.5 kg',
+          'Безчетков дигитален мотор 450W',
+          'Лазерна четка за откриване на невидимия прах',
+          'HEPA филтрация улавяща 99.99% от алергените',
+          'Сменяема батерия с до 60 минути работа'
+        ],
+        description: 'Почистването никога не е било толкова лесно. V12 Slim съчетава изключително леко тегло с мощността на кабелна прахосмукачка. Специалната лазерна четка осветява пода под ъгъл, разкривайки и най-фините прахови частици, за да бъдете сигурни в чистотата на дома си.'
       },
       {
         id: 203,
         name: 'Мини прахосмукачка PocketClean',
         category: 'Аксесоари',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-PKC-203-2026',
+        inStock: 30,
         price: '65.00 €',
         oldPrice: null,
         rating: 4.5,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Компактен размер (колкото бутилка вода)',
+          'Мощност 13 000 Pa за бързо почистване',
+          'Миещ се HEPA филтър',
+          'Накрайници за тесни пространства и трохи',
+          'Зареждане с USB-C кабел'
+        ],
+        description: 'Перфектното решение за кола, бюро или бързо почистване на трохи в кухнята. PocketClean е достатъчно малка, за да стои в жабката на автомобила, но разполага с достатъчно мощност за всмукване на твърди частици и прах от клавиатури и седалки.'
       },
       {
         id: 204,
         name: 'Робот с моп Niesa AquaClean Ultra',
         category: 'Умен дом',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-AQU-204-2026',
+        inStock: 5,
         price: '899.00 €',
         oldPrice: '999.00 €',
         rating: 5.0,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'HOT',
-        image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Двойни въртящи се мопове с натиск',
+          'Автоматично изпиране и изсушаване на моповете с горещ въздух',
+          'Резервоар за чиста и мръсна вода в базата',
+          'AI камера за разпознаване на 50+ вида препятствия',
+          'Тиха работа при сухо и мокро почистване'
+        ],
+        description: 'Пълна автономия в почистването на пода. AquaClean Ultra не просто забърсва, той търка пода с два въртящи се мопа с приложен натиск. Накрая се връща в базовата станция, където самостоятелно изпира и изсушава моповете си, за да предотврати появата на бактерии и миризми.'
       },
       {
         id: 205,
         name: 'Парочистачка Steam Master Pro',
         category: 'Уреди за под',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-STM-205-2026',
+        inStock: 11,
         price: '189.00 €',
         oldPrice: '220.00 €',
         rating: 4.6,
+        dateDelivery:'От 09.07 до 11.07',
         badge: '-15%',
-        image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Дезинфекция с пара на 110°C (убива 99.9% бактерии)',
+          'Загряване само за 15 секунди',
+          'Регулируема сила на парата в 3 нива',
+          'Комплект от 8 накрайника за фуги, стъкла и фаянс',
+          'Резервоар за вода 450ml с презареждане по време на работа'
+        ],
+        description: 'Почиствайте и дезинфекцирайте дома си без никакви химикали. Steam Master Pro използва силата на горещата пара под налягане, за да разтвори упорити мазнини в кухнята, мухъл във банята и замърсявания по под и плочки.'
       },
       {
         id: 206,
         name: 'Робот за прозорци Window Bot',
         category: 'Умен дом',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-WND-206-2026',
+        inStock: 14,
         price: '299.00 €',
         oldPrice: null,
         rating: 4.7,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Вакуумна система за сигурно залепване към стъклото',
+          'Двойно автоматично впръскване на вода',
+          'Интелигентно планиране на пътя по N и Z маршрути',
+          'Вградена батерия за безопасност при спиране на тока',
+          'Дистанционно управление и приложение'
+        ],
+        description: 'Забравете за опасното миене на прозорци на високи етажи. Window Bot се закрепва здраво за стъклото чрез силен вакуум и самостоятелно почиства големи прозорци, витрини и огледала, без да оставя следи и петна.'
       },
       {
         id: 207,
         name: 'Безкабелен моп Floor Washer',
         category: 'Почистване',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-FLW-207-2026',
+        inStock: 8,
         price: '249.00 €',
         oldPrice: '280.00 €',
         rating: 4.8,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Едновременно прахосмучене и измиване на пода',
+          'Система с два отделни резервоара (чиста/мръсна вода)',
+          'Функция за самопочистване на ролката на дока',
+          'LED интелигентен дисплей с индикатор за замърсяване',
+          'Батерия за 35 минути непрекъсната работа'
+        ],
+        description: 'Идеален за бързо почистване след разляти течности или кални отпечатъци. Floor Washer търка пода с чиста вода и препарат, като веднага всмуква мръсната вода в отделен контейнер. Подът остава сух и чист за секунди.'
       },
       {
         id: 208,
         name: 'Автоматична станция AutoEmpty Dock',
         category: 'Аксесоари',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-DCK-208-2026',
+        inStock: 19,
         price: '199.00 €',
         oldPrice: null,
         rating: 4.9,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'NEW',
-        image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Торба за прах с капацитет 3.0 литра (достатъчна за 7 седмици)',
+          'Автоматично изпразване на прахосмукачката за 10 секунди',
+          'HEPA филтрационна система против прахови алергени',
+           'Бързо зареждане на прахосмукачката',
+          'Индикатор за пълна торба'
+        ],
+        description: 'Добавете максимално удобство към вашия робот Niesa. Автоматичната станция изпразва контейнера за прах на робота веднага след приключване на почистването. Запечатаните торби предотвратяват контакта ви с прах до 60 дни.'
       }
     ]
   },
@@ -182,81 +416,185 @@ export const sectionData = [
         id: 301,
         name: 'Смарт колонка Niesa Sound',
         category: 'Аудио',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-SND-301-2026',
+        inStock: 16,
         price: '119.00 €',
         oldPrice: '140.00 €',
         rating: 4.7,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'HOT',
-        image: 'https://images.unsplash.com/photo-1543512214-318c7553f230?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1543512214-318c7553f230?auto=format&fit=crop&q=80&w=600',
+        features: [
+          '360-градусов хифи звук с дълбок бас',
+          'Вграден гласов асистент и контрол на умния дом',
+          'Поддръжка на Wi-Fi, Bluetooth 5.2 и Matter протокол',
+          'Микрофони с далечен обхват и физически бутон за изключване',
+          'Синхронизация на няколко колонки в Multi-room система'
+        ],
+        description: 'Niesa Sound е повече от колонка – тя е мостът към вашия умен дом. Насладете се на кристално чист звук с богат бас, докато управлявате осветлението, температурата и сигурността в дома си само с гласови команди.'
       },
       {
         id: 302,
         name: 'Смарт крушка RGB Zigbee',
         category: 'Осветление',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-BUL-302-2026',
+        inStock: 50,
         price: '25.00 €',
         oldPrice: null,
         rating: 4.5,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1550985616-10810253b84d?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1550985616-10810253b84d?auto=format&fit=crop&q=80&w=600',
+        features: [
+          '16 милиона цвята + топла/студена бяла светлина (2700K - 6500K)',
+          'Енергоспестяваща LED технология 9W (равностойна на 60W)',
+          'Контрол през приложение и планиране на графици',
+          'Синхронизация с музика и филми',
+          'Стандартен цокъл E27'
+        ],
+        description: 'Променете атмосферата във всяка стая за секунди. Смарт крушката ви позволява да регулирате яркoстта, цвета и температурата на светлината според настроението си или да настроите график за плавно събуждане сутрин.'
       },
       {
         id: 303,
         name: 'Умен термостат Thermo Smart',
         category: 'Климатизация',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-TRM-303-2026',
+        inStock: 10,
         price: '159.00 €',
         oldPrice: '189.00 €',
         rating: 4.9,
+        dateDelivery:'От 09.07 до 11.07',
         badge: '-15%',
-        image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Спестява до 30% от сметките за отопление',
+          'Геолокация – изключва отоплението, когато излезете',
+          'Цветен OLED сензорен дисплей',
+          'Съвместим с над 95% от газовите и електрически котли',
+          'Подробни статистики за консумацията на енергия'
+        ],
+        description: 'Поемете пълен контрол над отоплението в дома си. Thermo Smart се обучава спрямо вашите навици и изолацията на жилището, осигурявайки перфектна температура точно когато сте у дома и пестейки енергия, когато отсъствате.'
       },
       {
         id: 304,
         name: 'Камера за сигурност Cam Outdoor 4K',
         category: 'Сигурност',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-CAM-304-2026',
+        inStock: 13,
         price: '139.00 €',
         oldPrice: null,
         rating: 4.8,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'NEW',
-        image: 'https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Кристално 4K Ultra HD резолюция',
+          'Цветно нощно виждане с вграден прожектор',
+          'AI разпознаване на хора, животни и автомобили',
+          'Двупосочно аудио за разговор през камерата',
+          'Водоустойчив корпус със стандарт IP66'
+        ],
+        description: 'Пазете дома си денонощно с външната камера Cam Outdoor 4K. Изключително високата резолюция ви позволява да видите най-малките детайли, а изкуственият интелект филтрира фалшивите аларми от вятър и дъжд, уведомявайки ви само при истински движения.'
       },
       {
         id: 305,
         name: 'Видеозвънец Doorbell Pro',
         category: 'Сигурност',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-VDB-305-2026',
+        inStock: 8,
         price: '179.00 €',
         oldPrice: '210.00 €',
         rating: 4.6,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Широкоъгълна камера 180° от глава до пети',
+          'Двупосочна връзка в реално време',
+          'Детектор за засичане на пакети пред вратата',
+          'Захранване с батерия или съществуващи кабели',
+          'Вградена сирена и прожектор за безопасност'
+        ],
+        description: 'Вижте кой е пред вратата ви от всяка точка на света. С видеозвънеца Doorbell Pro можете да разговаряте с куриери или гости директно от телефона си, както и да получавате известия при засичане на хора или оставени пратки.'
       },
       {
         id: 306,
         name: 'Смарт брава Fingerprint Lock',
         category: 'Сигурност',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-LCK-306-2026',
+        inStock: 6,
         price: '229.00 €',
         oldPrice: null,
         rating: 4.9,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'TOP',
-        image: 'https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Отключване с пръстов отпечатък (биометричен сензор 0.3 сек)',
+          'Отключване през приложение, PIN код или физически ключ',
+          'Временни кодове за гости и куратори',
+          'Автоматично заключване при затваряне на вратата',
+          'Криптиране от банково ниво за максимална защита'
+        ],
+        description: 'Забравете за физическите ключове веднъж завинаги. Бравата Fingerprint Lock прави влизането у дома бързо и сигурно само с едно докосване. Можете да предоставяте временен достъп на гости през приложението, докато сте в чужбина.'
       },
       {
         id: 307,
         name: 'LED лента Niesa Ambient Light',
         category: 'Осветление',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-LED-307-2026',
+        inStock: 21,
         price: '49.00 €',
         oldPrice: '65.00 €',
         rating: 4.7,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Дължина 5 метра с възможност за удължаване или рязане',
+          'Адресируеми RGBIC светодиоди (много цветове едновременно)',
+          'Синхронизация с ритъма на музиката',
+          'Гъвкава силиконова защита IP65',
+          'Контролер с включен дистанционен панел'
+        ],
+        description: 'Вдъхнете живот на вашия интериор. LED лентата Ambient Light ви позволява да създавате уникални светлинни ефекти с множество цветове едновременно. Идеална за монтаж зад телевизори, под легла или под кухненски шкафове.'
       },
       {
         id: 308,
         name: 'Смарт хранилка Pet Feeder',
         category: 'За дома',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-PET-308-2026',
+        inStock: 11,
         price: '119.00 €',
         oldPrice: null,
         rating: 4.8,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Капацитет 4 литра за суха храна',
+          'Програмируеми порции и часове на хранене',
+          'Запис на 10-секундно гласово съобщение при хранене',
+          'Двойно захранване (адаптер + батерии за безопасност)',
+          'Купа от неръждаема стомана за лесна хигиена'
+        ],
+        description: 'Осигурете редовно и балансирано хранене за вашия домашен любимец, дори когато сте извън дома. През мобилното приложение задавате точния график и размер на порциите, а гласовият запис ще вика любимеца ви за ядене.'
       }
     ]
   },
@@ -269,81 +607,185 @@ export const sectionData = [
         id: 401,
         name: 'Пречиствател за въздух AirPurifier Pro',
         category: 'Климат',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-APR-401-2026',
+        inStock: 12,
         price: '319.00 €',
         oldPrice: '380.00 €',
         rating: 4.8,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'HOT',
-        image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&q=80&w=600',
+        features: [
+          '3-степенна филтрация: Предфилтър, True HEPA H13 и Активен въглен',
+          'Капацитет на почистване CADR 400 m³/h (за помещения до 50m²)',
+          'Лазерен сензор за качеството на въздуха в реално време',
+          'Ултратих нощен режим само 22dB',
+          'Йонизатор за допълнителна свежест'
+        ],
+        description: 'Дишайте чист и свеж въздух у дома. AirPurifier Pro филтрира 99.97% от фините прахови частици (PM2.5), полени, цигарен дим и неприятни миризми. Автоматичният режим регулира скоростта на вентилатора спрямо замърсеността на въздуха.'
       },
       {
         id: 402,
         name: 'Еър фрайър Air Fryer XXL',
         category: 'Кухня',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-AFR-402-2026',
+        inStock: 17,
         price: '169.00 €',
         oldPrice: null,
         rating: 4.9,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'TOP',
-        image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Голям капацитет 6.5 литра за цялото семейство',
+          'Циркулация на горещ въздух 360° за хрупкав резултат',
+          'До 85% по-малко мазнина спрямо традиционното пържене',
+          '8 предварително зададени програми на готвене',
+          'Незалепващо кошче, подходящо за съдомиялна'
+        ],
+        description: 'Приготвяйте любимите си пържени ястия по здравословен начин без мазнина. С Air Fryer XXL правите хрупкави картофки, сочни пържоли или зеленчуци за минути. Бързото загряване спестява време и електричество.'
       },
       {
         id: 403,
         name: 'Блендер Nutri Power 1200W',
         category: 'Кухня',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-BLN-403-2026',
+        inStock: 23,
         price: '99.00 €',
         oldPrice: '120.00 €',
         rating: 4.7,
+        dateDelivery:'От 09.07 до 11.07',
         badge: '-18%',
-        image: 'https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Мощен мотор 1200W с 25 000 оборота в минута',
+          '6-крилен нож от неръждаема стомана за трошене на лед',
+          '2 стъклени кани (1.5L за у дома и 0.6L за из път)',
+          'Импулсен режим и 3 степени на скорост',
+          'Защита срещу прегряване'
+        ],
+        description: 'Завъртете здравословния начин на живот на пълна скорост. Nutri Power блендира ядки, замразени плодове и лед за секунди, превръщайки ги в копринено гладки смутита, супи или сосове с пълно запазване на хранителните вещества.'
       },
       {
         id: 404,
         name: 'Тостер Stainless Steel 4-Slice',
         category: 'Кухня',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-TST-404-2026',
+        inStock: 15,
         price: '69.00 €',
         oldPrice: null,
         rating: 4.6,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1583623025817-d180a2221d0a?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1583623025817-d180a2221d0a?auto=format&fit=crop&q=80&w=600',
+        features: [
+          '4 широки отвора за филии и филийки франзела',
+          'Независим контрол на двете двойки отвори',
+          '6 степени на препичане',
+          'Функции за размразяване и презатопляне',
+          'Подвижна тавичка за трохи за лесно почистване'
+        ],
+        description: 'Перфектната закуска за цялото семейство наведнъж. Тостерът разполага с 4 широки слота и ви позволява да препичате 2 филии по един начин и 2 по друг, задоволявайки предпочитанията на всеки у дома.'
       },
       {
         id: 405,
         name: 'Сокоизстисквачка Slow Juicer',
         category: 'Кухня',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-JCR-405-2026',
+        inStock: 9,
         price: '149.00 €',
         oldPrice: '180.00 €',
         rating: 4.8,
+        dateDelivery:'От 09.07 до 11.07',
         badge: 'NEW',
-        image: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Бавна студена преса (45 оборота в минута)',
+          'Широк отвор 80mm за цели плодове без рязане',
+          'Запазва до 95% от ензимите и витамините',
+          'Изключително суха пулпа за максимален добив',
+          'Система срещу протичане (Drip-stop)'
+        ],
+        description: 'Бавната студена преса извлича максимално количество пресен сок от плодове, зеленчуци и листни зеленчуци. Тъй като няма загряване и окисление от бързи ножове, сокът запазва своите естествени витамини, ензими и наситен цвят за по-дълго.'
       },
       {
         id: 406,
         name: 'Мултикукър Smart Pressure Cooker',
         category: 'Кухня',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-MCK-406-2026',
+        inStock: 14,
         price: '189.00 €',
         oldPrice: null,
         rating: 4.9,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1544233726-9f1d2b27be8b?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1544233726-9f1d2b27be8b?auto=format&fit=crop&q=80&w=600',
+        features: [
+          '12 в 1 автоматични програми (варене, бързо готвене, су-вид, кисело мляко и др.)',
+          'Готвене под налягане спестява до 70% време',
+          'Вътрешна купа с керамично покритие 6L',
+          'Отложен старт до 24 часа и поддържане на топлината',
+          '10 нива на защита и безопасност на парата'
+        ],
+        description: 'Гответе вкусни и сложни ястия с натискането на един бутон. Smart Pressure Cooker замества няколко кухненски уреда, спестявайки място и време. От крехко месо до супи и ориз – всичко се приготвя с идеална текстура.'
       },
       {
         id: 407,
         name: 'Миксер с купа Stand Mixer 5L',
         category: 'Кухня',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-MIX-407-2026',
+        inStock: 7,
         price: '279.00 €',
         oldPrice: '320.00 €',
         rating: 4.8,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1590794056226-77ef3a6c4743?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1590794056226-77ef3a6c4743?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Планетарно разбъркване за перфектно хомогенизиране',
+          'Купа от неръждаема стомана с капацитет 5.0 литра',
+          'Мощен метални предавки мотор 1500W',
+          '6 скорости + пулсов режим',
+          'Включени 3 накрайника: кука за тесто, бъркалка за крем и плоска бъркалка'
+        ],
+        description: 'Мечтата на всеки любител сладкар. Планетарният миксер Stand Mixer меси тежки теста за хляб и козунаци с лекота, разбива пухкави белтъци и смесва кремове без остатъци по стените на купата.'
       },
       {
         id: 408,
         name: 'Ледогенератор Compact Ice Maker',
         category: 'Кухня',
+        brand: 'Niesa',
+        condition: 'Ново',
+        serialNumber: 'NES-ICE-408-2026',
+        inStock: 16,
         price: '139.00 €',
         oldPrice: null,
         rating: 4.5,
+        dateDelivery:'От 09.07 до 11.07',
         badge: null,
-        image: 'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&q=80&w=600'
+        image: 'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&q=80&w=600',
+        features: [
+          'Произвежда 9 кубчета лед само за 6-8 минути',
+          'Капацитет 12kg лед за 24 часа',
+          'Избор между 2 размера кубчета лед',
+          'Индикатор за пълен кош за лед и празен резервоар',
+          'Компактен дизайн, не изисква връзка към водопровод'
+        ],
+        description: 'Винаги имайте достатъчно лед за вашите партита или разхлаждащи напитки. Компактният ледогенератор Niesa работи бързо и самостоятелно – просто налейте вода в резервоара и след по-малко от 8 минути първите кубчета лед са готови.'
       }
     ]
   }

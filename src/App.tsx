@@ -9,6 +9,7 @@ import ProductSection from './ProductSection.tsx';
 import ProductDetailsPage from './pages/ProductDetailsPage.tsx';
 import  CartDrawer  from './CartDrawer.tsx'; // Импортираме Drawer-а
 import  WishListDrawer  from './WishListDrawer.tsx';
+import  AdminPanel  from './AdminPanel.tsx';
 import { CartProvider } from './context/CartContext.tsx';
 import { useCart } from './context/CartContext.tsx';
 
@@ -59,6 +60,7 @@ function App() {
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/admin" element={<AdminPanel />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
       </Routes>
       
