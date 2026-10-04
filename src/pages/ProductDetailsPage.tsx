@@ -4,14 +4,17 @@ import {sectionData} from "../data/productData";
 import {FiShoppingBag, FiHeart, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
 import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders  } from "react-icons/fi"
 import ProductCard from"./ProductCard";
+import ReviewSection from '../ReviewSection.tsx'
 
 function ProductDetailsPage(){
     const {id} = useParams<{id:string}>();
     const [quantity, setQuantity] = useState(1);
     const [isLiked, setIsLiked]=useState(false);
-
+    const [isEditing, SetIsEditing]=useState(false);
+    const [isAddNewProduct, setIsAddNewProduct]=useState(false);
     const [selectedImage, setSelectedImage]= useState(0);
     
+    const isInputMode = isEditing || isAddNewProduct;
     const renderIcon=(iconName?: string)=>
     {
         switch(iconName){
@@ -281,7 +284,7 @@ function ProductDetailsPage(){
         </div>
 
 
-
+            <ReviewSection productId={product.id}/>
 
         </div>
 
