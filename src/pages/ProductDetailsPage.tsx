@@ -2,18 +2,19 @@ import React, {useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {sectionData} from "../data/productData";
 import {FiShoppingBag, FiHeart, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
-import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders  } from "react-icons/fi"
+import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders, FiEdit, FiX, FiSave } from "react-icons/fi"
 import ProductCard from"./ProductCard";
 import ReviewSection from '../ReviewSection.tsx'
 
 function ProductDetailsPage(){
+    
     const {id} = useParams<{id:string}>();
     const [quantity, setQuantity] = useState(1);
     const [isLiked, setIsLiked]=useState(false);
-    const [isEditing, SetIsEditing]=useState(false);
+    const [isEditing, setIsEditing]=useState(false);
     const [isAddNewProduct, setIsAddNewProduct]=useState(false);
     const [selectedImage, setSelectedImage]= useState(0);
-    
+    const [formData, setFormData] = useState<any>({});
     const isInputMode = isEditing || isAddNewProduct;
     const renderIcon=(iconName?: string)=>
     {
@@ -34,8 +35,11 @@ function ProductDetailsPage(){
 };
     
 
-    
 
+const handleChange= (field: string, value: any) => {
+    setFormData((prev: any) => ({ ...prev, [field]: value}));
+
+};
 
     const allProducts =sectionData
     .flatMap((section) => section.products)
@@ -139,19 +143,99 @@ function ProductDetailsPage(){
                         <span className="text-xs font-bold text-[#10B981] uppercase tracking-wider">
                             {product.category}
                         </span>
-                        
+                        <button
+  onClick={() => {
+ 
+    setFormData({ ...product }); 
+    setIsEditing(true);
+  }}
+  className="bg-[#10B981] text-white font-bold py-2 px-4 rounded-xl ml-4"
+>
+  <FiEdit size={20}></FiEdit>
+</button>
+
+<button
+  onClick={() => {
+ 
+    
+    setIsEditing(false);
+  }}
+  className="bg-[#10B981] text-white font-bold py-2 px-4 rounded-xl ml-4"
+>
+  <FiX size={20}></FiX>
+</button>
+
+<button
+  onClick={() => {
+ 
+    
+    setIsEditing(false);
+  }}
+  className="bg-[#10B981] text-white font-bold py-2 px-4 rounded-xl ml-4"
+>
+  <FiSave size={20}></FiSave>
+</button>
+                            <div className="mb-4 flex gap-3">
+                                
+  
+</div>
+
+                        {isInputMode ? (
+                            <input
+                            type="text"
+                            value={formData.name || ''}
+                            onChange={(e) =>handleChange('name', e.target.value)}
+                            className="w-full bg-transparent  text-2xl font-extrabold text-[#DAF1DE] rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            placeholder= "Име на продукта"
+                            />
+                        ) : (
+                            
                         <h1 className="text-3xl font-extrabold text-[#DAF1DE] mt-2">
                             {product.name}
                         </h1>
+                        )}
+
+                        {isInputMode ? (
+                            <input
+                            type="text"
+                            value={formData.brand || ''}
+                            onChange={(e) =>handleChange('brand', e.target.value)}
+                            className="mt-1 w-full bg-transparent  text-sm font-extrabold text-[#DAF1DE] rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            placeholder= "Име на марката"
+                            />
+                        ) : (
                         <h1 className="text-sm font-extrabold text-[#DAF1DE] mt-5">
                            Марка: {product.brand}
                         </h1>
+                        )}
+
+                        {isInputMode ? (
+                            <input
+                            type="text"
+                            value={formData.serialNumber || ''}
+                            onChange={(e) =>handleChange('serialNumber', e.target.value)}
+                            className="mt-1 w-full bg-transparent  text-sm font-extrabold text-[#DAF1DE] rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            placeholder= "Сериен номер"
+                            />
+                        ) : (
                         <h1 className="text-sm font-extrabold text-[#DAF1DE] mt-2">
                            Сериен номер: {product.serialNumber}
                         </h1>
+                        )}
+
+                        {isInputMode ? (
+                            <input
+                            type="text"
+                            value={formData.condition || ''}
+                            onChange={(e) =>handleChange('condition', e.target.value)}
+                            className="mt-1 w-full bg-transparent  text-sm font-extrabold text-[#DAF1DE] rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            placeholder= "Състояние на продукта"
+                            />
+                        ) : (
                         <h1 className="text-sm font-extrabold text-[#DAF1DE] mt-2">
                            Състояние на продукта: {product.condition}
                         </h1>
+                        )}
                         
                         
                         <div className="my-2 mt-5">
@@ -160,21 +244,59 @@ function ProductDetailsPage(){
                                 {product.features?.map((feature, index) => (
                                     <div key={index} className="flex items-start gap-2 text-sm text-gray-300">
                                         <span className="text-emerald-400 font-bold">•</span>
+                                        
+                                        
+                                        {isInputMode ? (
+                            <input
+                            type="text"
+                            value={formData.feature || ''}
+                            onChange={(e) =>handleChange('feature', e.target.value)}
+                            className="mt-1 w-full bg-transparent  text-sm font-extrabold text-white rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            placeholder= "Характеристика на продукта"
+                            />
+                        ) : (
                                         <span>{feature}</span>
+                        )}
                             </div>
                                 ))}
                         </div>
                         </div>
+                        
                             <div className="grid grid-cols-1 lg:grid-cols-2 ">
                         <div className="flex items-center gap-8 mt-4 text-sm">
+                            {isInputMode ? (
+                            <input
+                            type="text"
+                            value={formData.dateDelivery || ''}
+                            onChange={(e) =>handleChange('dateDelivery', e.target.value)}
+                            className="mt-1 w-full bg-transparent  text-sm font-extrabold text-white rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            placeholder= "Наличност"
+                            />
+                        ) : (
                             <span className="text-[#10B981] flex items-center gap-1">
                                 <FiCheck size={16}></FiCheck>
                                 В наличност
                             </span>
+                        )}
+                            
+                            {isInputMode ? (
+                                <span className="text-[#DAF1DE] flex items-center gap-1">
+                                <FiTruck size={16}></FiTruck>
+                                
+                            <input
+                            type="text"
+                            value={formData.dateDelivery || ''}
+                            onChange={(e) =>handleChange('dateDelivery', e.target.value)}
+                            className="mt-1 w-full  bg-transparent  text-sm font-extrabold text-white rounded-xl p-2 outline-none focus:border-[#10B981]"    
+                            placeholder= "Доставка"
+                            />
+                            </span>
+                        ) : (
                             <span className="text-[#DAF1DE] flex items-center gap-1">
                                 <FiTruck size={16}></FiTruck>
                                  {product.dateDelivery}
                             </span>
+                        )}
                             
                         </div>
                             </div>
@@ -185,10 +307,28 @@ function ProductDetailsPage(){
                                 можеш да разбереш при завършване на поръчката.</p>
                             </div>
 
+                                {isInputMode ? (
+                            
                             <div className="mt-8 flex items-center justify-center gap-1 text-[#163B32] font-extrabold bg-[#DAF1DE] rounded-full px-2 py-2 shadow-md">
                                 <FiBox size={26}></FiBox>
+                                <span className=" font-md text-[#163B32]">Още</span>
+                                <input
+                            type="number"
+                            value={formData.inStock || ''}
+                            onChange={(e) =>handleChange('inStock', e.target.value)}
+                            className="mt-1 w-[35%] bg-transparent border border-[#163B32] text-sm font-extrabold text-center rounded-xl p-2 mx-1 outline-none focus:border-[#10B981]"    
+                            placeholder= "Бройки в наличност"
+                            />
+                            <span className=" text-[#163B32] font-extrabold">броя налични в нашия склад</span>
+  </div>
+                        ) : (
+                                <div className="mt-8 flex items-center justify-center gap-1 text-[#163B32] font-extrabold bg-[#DAF1DE] rounded-full px-2 py-2 shadow-md">
+                                <FiBox size={26}></FiBox>
                                 <span>Още {product.inStock} броя налични в нашия склад</span>
+                        
                             </div>
+                            )}
+                        
                             
                         <div className="flex items-baseline gap-4 mt-6">
                             <span className="text-3xl font-extrabold text-[#DAF1DE]">
@@ -238,12 +378,23 @@ function ProductDetailsPage(){
             </h1>
 
                  <div className="mt-10 text-center">
+                    {isInputMode ? (
+                            <input
+                            type="text"
+                            value={formData.inStock || ''}
+                            onChange={(e) =>handleChange('inStock', e.target.value)}
+                            className="text-base leading-relaxed text-gray-300 font-light max-w-4xl mx-auto bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-3xl p-8 backdrop-blur-md shadow-xl text-center"    
+                            placeholder= "Описание"
+                            />
+                        ) : (
             <p className="text-base leading-relaxed text-gray-300 font-light max-w-4xl mx-auto bg-[#163B32]/20 border border-[#DAF1DE]/15 rounded-3xl p-8 backdrop-blur-md shadow-xl text-center">
                             {product.description}
                         </p>
+                        )}
                  </div>
 
                  <div className="mt-32 ">
+                    
             <h1 className="text-3xl font-extrabold text-[#DAF1DE] text-center uppercase mb-8">
                             Всички характеристики на продукта
             </h1>
