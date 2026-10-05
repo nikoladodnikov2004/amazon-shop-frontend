@@ -62,9 +62,38 @@ const handleFeatureChange = (index: number, value:string) => {
         .filter((item) => item.category === product?.category && item.id !== product?.id)
         .slice(0,4);
 
+   const activeStatus = isInputMode ? formData.availability : product?.availability;
 
 
-    if(!product){
+   const getButtonState = () => {
+    if(activeStatus === STATUS_NOT_AVAILABLE){
+        return{
+            text: "Изчерпан",
+            style: "cursor-not-allowed bg-red-500/60 text-[#051F20]",
+            disabled: true,
+            icon: <FiX size={20} />
+        };
+    }
+    if(activeStatus === STATUS_COMING_SOON){
+        return{
+            text: "Очаквайте скоро",
+            style: "cursor-not-allowed bg-amber-500/60 text-[#051F20]",
+            disabled: true,
+            icon: <FiClock size={20} />
+        };
+    }
+    return {
+            text: "Купи",
+            style: "flex-1 bg-[#10B981] hover:bg-[#235347] text-[#051F20] hover:text-[#DAF1DE] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors",
+            disabled: false,
+            icon: <FiShoppingBag size={20} />
+    }
+   }
+   const btn= getButtonState();
+
+   
+    
+   if(!product){
         return (
             <div className="min-h-[70vh] bg-[#051F20] flex flex-col items-center justify-center text-[#DAF1DE] px-4">
                 <h2 className="text-3xl font-bold mb-4">Продуктът не е намерен</h2>
@@ -414,13 +443,36 @@ const handleFeatureChange = (index: number, value:string) => {
                         
                             
                         <div className="flex items-baseline gap-4 mt-6">
+                             {isInputMode ? (
+                            <input
+                            type="text"
+                            value={formData.price || ''}
+                            onChange={(e) =>handleChange('price', e.target.value)}
+                            className="bg-transparent font-extrabold outline-none p-0 text-3xl text-[#DAF1DE] w-[30%]"    
+                            placeholder= "Нова цена"
+                            />
+                        ) : (
                             <span className="text-3xl font-extrabold text-[#DAF1DE]">
                                 {product.price}
                             </span>
-                            {product.oldPrice && (
+                        )}
+                         {isInputMode ? (
+                            <input
+                            type="text"
+                            value={formData.oldPrice || ''}
+                            onChange={(e) =>handleChange('oldPrice', e.target.value)}
+                            className="bg-transparent outline-none p-0 text-lg text-[#DAF1DE]/40 line-through "    
+                            placeholder= "Стара цена"
+                            />
+                         ):(
+
+                            product.oldPrice && (
+                                
+                                
                                 <span className="text-lg line-through text-[#DAF1DE]/40">
                                     {product.oldPrice}
                                 </span>
+                            )
                             )}
                         </div>
                     </div>
@@ -445,12 +497,14 @@ const handleFeatureChange = (index: number, value:string) => {
                                     </button>
                                    
                         </div>
-
-                        <button className="flex-1 bg-[#10B981] hover:bg-[#235347] text-[#051F20] hover:text-[#DAF1DE] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors">
-                            <FiShoppingBag size={20}></FiShoppingBag>
-                            Купи ({quantity})
-                            
-                        </button>
+                                
+                        <button
+  disabled={btn.disabled}
+  className={`flex-1 font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors ${btn.style}`}
+>
+  {btn.icon}
+  {btn.text}
+</button>
                     </div>
                     
                 </div>
