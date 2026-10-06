@@ -223,9 +223,9 @@ const handleFeatureChange = (index: number, value:string) => {
                 setIsEditing(true);
                 
             }}
-            className=" text-white font-bold py-2 px-4 rounded-xl"
+            className=" text-white font-bold py-2 px-4 rounded-xl bg-[#10B981]/40"
             >
-            <FiEdit2 size={20} className="hover:text-yellow-400 transition-colors duration-300"></FiEdit2>
+            <FiEdit2 size={20} className="hover:text-yellow-400 transition-colors duration-300 "></FiEdit2>
             </button>
 
                 ):(
@@ -236,9 +236,9 @@ const handleFeatureChange = (index: number, value:string) => {
                 
                 setIsEditing(false);
             }}
-            className=" text-white font-bold py-2 px-4 rounded-xl "
+            className=" text-white font-bold py-2 px-4 rounded-xl bg-[#10B981]/40 mr-1"
             >
-            <FiX size={20} className="hover:text-red-600 transition-colors duration-300"></FiX>
+            <FiX size={20} className="hover:text-red-600 transition-colors duration-300 "></FiX>
             </button>
 
             <button
@@ -247,9 +247,9 @@ const handleFeatureChange = (index: number, value:string) => {
                 
                 setIsEditing(false);
             }}
-            className=" text-white font-bold py-2 px-4 rounded-xl "
+            className=" text-white font-bold py-2 px-4 rounded-xl bg-[#10B981]/40 mr-1"
             >
-            <FiSave size={20} className="hover:text-green-600 transition-colors duration-300"></FiSave>
+            <FiSave size={20} className="hover:text-green-400 transition-colors duration-300 "></FiSave>
             </button>
 
             <button
@@ -258,7 +258,7 @@ const handleFeatureChange = (index: number, value:string) => {
                 
                 setFormData('');
             }}
-            className=" text-white font-bold py-2 px-4 rounded-xl "
+            className=" text-white font-bold py-2 px-4 rounded-xl bg-[#10B981]/40 mr-1"
             >
             <FiMinus size={20} className="hover:text-amber-500 transition-colors duration-300"></FiMinus>
             </button>
@@ -269,7 +269,7 @@ const handleFeatureChange = (index: number, value:string) => {
                 
                 setFormData({ ...product }); 
             }}
-            className=" text-white font-bold py-2 px-4 rounded-xl "
+            className=" text-white font-bold py-2 px-4 rounded-xl bg-[#10B981]/40 mr-1"
             >
             <FiRotateCcw size={20} className="hover:text-gray-400 transition-colors duration-300"></FiRotateCcw>
             </button>
@@ -292,7 +292,7 @@ const handleFeatureChange = (index: number, value:string) => {
                             type="text"
                             value={formData.name || ''}
                             onChange={(e) =>handleChange('name', e.target.value)}
-                            className="w-full p-0 bg-transparent text-3xl font-extrabold text-[#DAF1DE] rounded-sm outline-none focus:border-[#10B981]"    
+                            className="w-full p-0 bg-transparent text-3xl font-extrabold text-[#DAF1DE] rounded-sm outline-none focus:border-[#10B981] "    
                             placeholder= "Име на продукта"
                             />
                         ) : (
