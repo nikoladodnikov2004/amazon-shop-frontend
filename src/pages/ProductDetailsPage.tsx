@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {sectionData} from "../data/productData";
 import {FiShoppingBag, FiHeart, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
-import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders, FiEdit2, FiX, FiSave } from "react-icons/fi"
+import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders, FiEdit2, FiX, FiSave, FiMinus, FiRotateCcw } from "react-icons/fi"
 import ProductCard from"./ProductCard";
 import ReviewSection from '../ReviewSection.tsx'
 
@@ -48,7 +48,7 @@ const handleChange= (field: string, value: any) => {
 };
 
 const handleFeatureChange = (index: number, value:string) => {
-    const updatedFeatures = [...(formData.features || [])]
+    const updatedFeatures = [...(formData.features ?? product?.features ?? ['','','','',''])]
     updatedFeatures[index]= value;
     handleChange('features', updatedFeatures);
 };
@@ -62,8 +62,8 @@ const handleFeatureChange = (index: number, value:string) => {
         .filter((item) => item.category === product?.category && item.id !== product?.id)
         .slice(0,4);
 
-   const activeStatus = isInputMode ? formData.availability : product?.availability;
-
+   const activeStatus = isInputMode ? formData.availability : product?.availability ;
+    const activeDeliveryDate = isInputMode ? formData.dateDelivery : product?.dateDelivery ;
 
    const getButtonState = () => {
     if(activeStatus === STATUS_NOT_AVAILABLE){
@@ -71,7 +71,11 @@ const handleFeatureChange = (index: number, value:string) => {
             text: "Изчерпан",
             style: "cursor-not-allowed bg-red-500/60 text-[#051F20]",
             disabled: true,
-            icon: <FiX size={20} />
+            icon: <FiX size={20} />,
+
+            shippingText:"В момента продуктът не е наличен за доставка",
+            shippingColor: 'text-red-400',
+            shippingIcon: <FiX size={18} className="text-red-400" />
         };
     }
     if(activeStatus === STATUS_COMING_SOON){
@@ -79,14 +83,28 @@ const handleFeatureChange = (index: number, value:string) => {
             text: "Очаквайте скоро",
             style: "cursor-not-allowed bg-amber-500/60 text-[#051F20]",
             disabled: true,
-            icon: <FiClock size={20} />
+            dateDelivery:"Няма информация за приблизителна доставка",
+            
+            icon: <FiClock size={20} />,
+            shippingText:activeDeliveryDate
+            ? `Очаквана доставка: ${activeDeliveryDate}`
+            :"Няма информация за приблизителна доставка",
+            shippingColor: 'text-amber-400',
+            shippingIcon: <FiClock size={18} className="text-amber-400" />
+            
         };
     }
     return {
             text: "Купи",
             style: "flex-1 bg-[#10B981] hover:bg-[#235347] text-[#051F20] hover:text-[#DAF1DE] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors",
             disabled: false,
-            icon: <FiShoppingBag size={20} />
+            icon: <FiShoppingBag size={20} />,
+
+           shippingText: activeDeliveryDate
+           ?`${formData.dateDelivery}`
+           :"Бърза доставка до 24-48 часа",
+             shippingColor: 'text-[#DAF1DE]',
+             shippingIcon: <FiTruck size={18} className="text-[#DAF1DE]" />,
     }
    }
    const btn= getButtonState();
@@ -181,9 +199,19 @@ const handleFeatureChange = (index: number, value:string) => {
                 <div className="flex flex-col space-y-6">
                     <div>
                             <div className="flex items-center">
+                                {isInputMode ? (
+                            <input
+                            type="text"
+                            value={formData.category || ''}
+                            onChange={(e) =>handleChange('category', e.target.value)}
+                            className=" bg-transparent text-xs font-bold text-[#10B981] p-0 outline-none uppercase tracking-wider"    
+                            placeholder= "Име на категорията"
+                            />
+                        ) : (
                         <span className="text-xs font-bold text-[#10B981] uppercase tracking-wider">
                             {product.category}
                         </span>
+                        )}
                                 
                             <div className="ml-4 text-gray-300 rounded-2xl">
                                 {!isEditing? (
@@ -222,6 +250,28 @@ const handleFeatureChange = (index: number, value:string) => {
             className=" text-white font-bold py-2 px-4 rounded-xl "
             >
             <FiSave size={20} className="hover:text-green-600 transition-colors duration-300"></FiSave>
+            </button>
+
+            <button
+            onClick={() => {
+            
+                
+                setFormData('');
+            }}
+            className=" text-white font-bold py-2 px-4 rounded-xl "
+            >
+            <FiMinus size={20} className="hover:text-amber-500 transition-colors duration-300"></FiMinus>
+            </button>
+
+            <button
+            onClick={() => {
+            
+                
+                setFormData({ ...product }); 
+            }}
+            className=" text-white font-bold py-2 px-4 rounded-xl "
+            >
+            <FiRotateCcw size={20} className="hover:text-gray-400 transition-colors duration-300"></FiRotateCcw>
             </button>
                 </>
                 )}
@@ -306,7 +356,7 @@ const handleFeatureChange = (index: number, value:string) => {
                                         {isInputMode ? (
                             <input
                             type="text"
-                            value={formData.features?.[index] ?? feature ?? ''}
+                            value={formData.features?.[index] ?? ''}
                             onChange={(e) =>handleFeatureChange(index, e.target.value)}
                             className=" w-full bg-transparent text-sm text-gray-200 rounded-sm p-0 outline-none focus:border-[#10B981]"    
                             placeholder= "Характеристика на продукта"
@@ -428,7 +478,7 @@ const handleFeatureChange = (index: number, value:string) => {
                             type="text"
                             value={formData.inStock || ''}
                             onChange={(e) =>handleChange('inStock', e.target.value)}
-                            className=" bg-transparent font-extrabold text-center rounded-xl p-0 outline-none focus:border-[#10B981] w-[3.5%]"    
+                            className=" bg-[#10B981]/50 font-extrabold text-center rounded-xl p-0 outline-none w-[10%]"    
                             
                             />
                             <span className=" text-[#163B32] font-extrabold">броя налични в нашия склад</span>
@@ -498,13 +548,15 @@ const handleFeatureChange = (index: number, value:string) => {
                                    
                         </div>
                                 
-                        <button
-  disabled={btn.disabled}
-  className={`flex-1 font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors ${btn.style}`}
->
-  {btn.icon}
-  {btn.text}
-</button>
+                                        <button
+                                        type="button"
+                disabled={btn.disabled}
+                className={`flex-1 font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors ${btn.style}`}
+                >
+                {btn.icon}
+                {btn.text}
+                
+                </button>
                     </div>
                     
                 </div>
