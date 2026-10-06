@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {sectionData} from "../data/productData";
 import {FiShoppingBag, FiHeart, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
-import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders, FiEdit2, FiX, FiSave, FiMinus, FiRotateCcw } from "react-icons/fi"
+import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders, FiEdit2, FiX, FiSave, FiMinus, FiRotateCcw, FiUpload } from "react-icons/fi"
 import ProductCard from"./ProductCard";
 import ReviewSection from '../ReviewSection.tsx'
 
@@ -144,12 +144,22 @@ const handleFeatureChange = (index: number, value:string) => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mt-20">
                     <div className="flex flex-col gap-4">
                 <div className="relative group rounded-3xl overflow-hidden bg-[#163B32]/30 border border-[#163B32] p-4 ">
+                    
+
+
                     <img
-                        src={product.images?.[selectedImage]}
+                        src={isInputMode ? (formData.image || product?.image) : product?.image}
                         alt={product.name}
                         className="w-full h-[400px] sm:h-[500px] object-cover rounded-2xl">
 
                         </img>
+
+                        {isInputMode && (
+                            <label className="absolute inset-0 bg-black/60 group-hover:opacity-100 opacity-0 flex flex-col items-center justify-center gap-2 cursor-pointer transition-opacity backdrop-blur-sm">
+                                <FiUpload size={24} className="text-[#10B981]"></FiUpload>
+                            <span className="text-xs font-semibold text-white">Смени главната снимка</span>
+                            </label>
+                            )}
                         
                         <button 
                         onClick={() =>setIsLiked(!isLiked)}
