@@ -202,6 +202,17 @@ const handleFeatureChange = (index: number, value:string) => {
                     {product.badge && (
                         <span className="font-niesa text-center text-[#DAF1DE] absolute w-16 top-8 left-8 bg-[#10B981] text-[#051F20] text-2xl rounded-full shadow-md font-bold uppercase ">{product.badge}</span>
                     )}
+                    {isInputMode ?(
+                        <input
+                            type="text"
+                            value={formData.badge || ''}
+                            onChange={(e) =>handleChange('badge', e.target.value)}
+                            className=" font-niesa text-center text-[#DAF1DE] absolute w-16 top-8 left-8 bg-[#10B981] text-[#051F20] text-2xl rounded-full shadow-md font-bold uppercase "    
+                            placeholder= ""
+                            />
+                    ):(
+                        <span className="font-niesa text-center text-[#DAF1DE] absolute w-16 top-8 left-8 bg-[#10B981] text-[#051F20] text-2xl rounded-full shadow-md font-bold uppercase ">{product.badge}</span>
+                    )}
                 </div>
                 <div className="flex gap-3 overflow-x-auto pb-2 flex items-center justify-center">
                     
