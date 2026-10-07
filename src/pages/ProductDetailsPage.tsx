@@ -47,6 +47,14 @@ const handleChange= (field: string, value: any) => {
 
 };
 
+
+
+const handleImageGalleryChange = (index: number, value:string) => {
+    const updatedImageGallery = [...(formData.images ?? product?.images ?? [])]
+    updatedImageGallery[index]= value;
+    handleChange('images', updatedImageGallery);
+};
+
 const handleFeatureChange = (index: number, value:string) => {
     const updatedFeatures = [...(formData.features ?? product?.features ?? ['','','','',''])]
     updatedFeatures[index]= value;
@@ -143,12 +151,17 @@ const handleFeatureChange = (index: number, value:string) => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mt-20">
                     <div className="flex flex-col gap-4">
+                
+                
                 <div className="relative group rounded-3xl overflow-hidden bg-[#163B32]/30 border border-[#163B32] p-4 ">
                     
 
 
                     <img
-                        src={isInputMode ? (formData.image || product?.image) : product?.image}
+                        src={isInputMode 
+                            ? (formData.images?.[selectedImage] ?? product?.images?.[selectedImage]) 
+                            : product?.images?.[selectedImage]
+                        }
                         alt={product.name}
                         className="w-full h-[400px] sm:h-[500px] object-cover rounded-2xl">
 
@@ -156,10 +169,30 @@ const handleFeatureChange = (index: number, value:string) => {
 
                         {isInputMode && (
                             <label className="absolute inset-0 bg-black/60 group-hover:opacity-100 opacity-0 flex flex-col items-center justify-center gap-2 cursor-pointer transition-opacity backdrop-blur-sm">
+                                
                                 <FiUpload size={24} className="text-[#10B981]"></FiUpload>
+                                
                             <span className="text-xs font-semibold text-white">Смени главната снимка</span>
+                            
+                            <input
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => {
+                                const file = e.target.files?.[0];
+                            
+                            if(file){
+                                const previewUrl = URL.createObjectURL(file);
+                                handleImageGalleryChange(selectedImage, previewUrl)
+                            }
+                        
+                            }}
+                            />
+                            
                             </label>
                             )}
+                            
+                        
                         
                         <button 
                         onClick={() =>setIsLiked(!isLiked)}
