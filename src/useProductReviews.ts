@@ -1,7 +1,7 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import api from "./api/axios";
 
-export interface Review{
+ interface Review{
         id:string;
         productId:string;
         rating:number;
@@ -15,13 +15,15 @@ export interface Review{
     const numericProductId = Number(productId);
     
 
-  useEffect(() => {
-    if(!numericProductId && numericProductId !==0)
-        return;
 
-        api.get(`/Review?productId=${numericProductId}`)
-        
-        .then((res) => {
+    const fetchReviews = useCallback(() => {
+    if (isNaN(numericProductId) || numericProductId <= 0) {
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    api.get(`/Review?productId=${numericProductId}`)
+    .then((res) => {
             setReviews(res.data);
             setLoading(false);
         })
@@ -30,8 +32,13 @@ export interface Review{
         console.error("Грешка при зареждане на отзивите:", err);
         setLoading(false);
     });
-}, [numericProductId]);
+    }, [numericProductId]);
+  useEffect(() => {
+    fetchReviews();
+  }, [fetchReviews]);
 
+        
+        
 
 const totalReviews=reviews.length;
 
@@ -39,7 +46,7 @@ const totalReviews=reviews.length;
         ? (reviews.reduce((acc, r) => acc + r.rating, 0) / totalReviews).toFixed(1)
         : "0.0";
 
-return {reviews, setReviews, loading, totalReviews, averageRating};
+return {reviews, setReviews, loading, totalReviews, averageRating, refetch:fetchReviews};
 } 
 
 export default useProductReviews;
