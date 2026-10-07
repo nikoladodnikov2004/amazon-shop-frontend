@@ -41,3 +41,5 @@ const totalReviews=reviews.length;
 
 return {reviews, setReviews, loading, totalReviews, averageRating};
 } 
+
+export default useProductReviews;

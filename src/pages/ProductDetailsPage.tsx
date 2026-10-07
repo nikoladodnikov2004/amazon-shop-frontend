@@ -5,8 +5,9 @@ import {FiShoppingBag, FiHeart, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCh
 import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders, FiEdit2, FiX, FiSave, FiMinus, FiRotateCcw, FiUpload } from "react-icons/fi"
 import ProductCard from"./ProductCard";
 import ReviewSection from '../ReviewSection.tsx'
+import useProductReviews from '../useProductReviews.ts'
 
-function ProductDetailsPage(){
+function ProductDetailsPage({productId}:{productId: string | number}){
     
     const {id} = useParams<{id:string}>();
     const [quantity, setQuantity] = useState(1);
@@ -135,7 +136,7 @@ const handleFeatureChange = (index: number, value:string) => {
     }
 
     
-        
+    const {averageRating, totalReviews} = useProductReviews(productId);
     
 
     return (
@@ -356,6 +357,8 @@ const handleFeatureChange = (index: number, value:string) => {
                         </h1>
                         )}
 
+                        <span><p className="font-bold text-lg mt-3">Рейтинг на продукта:{averageRating}</p></span>
+
                         {isInputMode ? (
                             <input
                             type="text"
@@ -365,10 +368,12 @@ const handleFeatureChange = (index: number, value:string) => {
                             placeholder= "Име на марката"
                             />
                         ) : (
-                        <h1 className="text-sm font-extrabold text-[#DAF1DE] mt-5">
+                        <h1 className="text-sm font-extrabold text-[#DAF1DE] mt-3">
                            Марка: {product.brand}
                         </h1>
                         )}
+
+                        
 
                         {isInputMode ? (
                             <input
