@@ -136,7 +136,7 @@ const handleFeatureChange = (index: number, value:string) => {
     }
 
     
-    const {averageRating, totalReviews} = useProductReviews(productId);
+    const {averageRating, totalReviews} = useProductReviews(id ||"");
     
 
     return (
