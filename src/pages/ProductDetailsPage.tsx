@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {sectionData} from "../data/productData";
 import {FiShoppingBag, FiHeart, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiTruck, FiBox} from "react-icons/fi" 
-import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders, FiEdit2, FiX, FiSave, FiMinus, FiRotateCcw, FiUpload } from "react-icons/fi"
+import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, FiPackage, FiLayers, FiDisc,FiSliders, FiEdit2, FiX, FiSave, FiMinus, FiRotateCcw, FiUpload, FiStar } from "react-icons/fi"
 import ProductCard from"./ProductCard";
 import ReviewSection from '../ReviewSection.tsx'
 import useProductReviews from '../useProductReviews.ts'
@@ -357,7 +357,12 @@ const handleFeatureChange = (index: number, value:string) => {
                         </h1>
                         )}
 
-                        <span><p className="font-bold text-lg mt-3">Рейтинг на продукта:{averageRating}</p></span>
+                        <div className="">
+                            <p className="font-bold text-lg mt-3 flex items-center justify-start  gap-1">
+                                <FiStar className="fill-[#D4AF37]"></FiStar>{averageRating}
+                                </p>
+                                <p className="text-sm text-gray-300/50">Този продукт има {totalReviews} отзива</p>
+                                </div>
 
                         {isInputMode ? (
                             <input
