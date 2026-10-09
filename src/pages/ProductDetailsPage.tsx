@@ -6,9 +6,18 @@ import { FiTag, FiHash, FiZap,  FiShield,  FiInfo, FiClock,  FiDroplet,  FiCpu, 
 import ProductCard from"./ProductCard";
 import ReviewSection from '../ReviewSection.tsx'
 import useProductReviews from '../useProductReviews.ts'
+import {useCart} from "../context/CartContext";
+
 
 function ProductDetailsPage({productId}:{productId: string | number}){
+     const {addToCart} = useCart();
     
+        const handleAddToCart = (e: React.MouseEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("Добавяне на продукт ID:", productId);
+            addToCart(1);
+        };
     const {id} = useParams<{id:string}>();
     const [quantity, setQuantity] = useState(1);
     const [isLiked, setIsLiked]=useState(false);
@@ -614,6 +623,7 @@ const handleFeatureChange = (index: number, value:string) => {
                                 
                                         <button
                                         type="button"
+                                        onClick={handleAddToCart}
                 disabled={btn.disabled}
                 className={`flex-1 font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors ${btn.style}`}
                 >
