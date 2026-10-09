@@ -7,7 +7,7 @@ export const wishListService = {
     return response.data;
   },
 
-  addToCart: async (productId: number): Promise<WishListItemDto> => {
+  addToWishList: async (productId: number): Promise<WishListItemDto> => {
     const response = await api.post<WishListItemDto>("/WishList", { productId});
     return response.data;
   },
