@@ -43,9 +43,11 @@ function CartDrawer ({isOpen, onClose}:CartDrawerProps){
                     
                     </div>
                     <div className="gap-1">
-                    <button type="button"
+                    <button 
+                    type="button"
 
-                                         onClick={() =>clearCart()} className="text-gray-300/30 cursor-pointer hover:bg-[#DAF1DE]/10 hover:text-gray-300 rounded-lg transform duration-300 leading-relaxed p-1 mb-1 mr-5">
+                    onClick={() =>clearCart()} 
+                    className="text-gray-300/30 cursor-pointer hover:bg-[#DAF1DE]/10 hover:text-gray-300 rounded-lg transform duration-300 leading-relaxed p-1 mb-1 mr-5">
                     <TbShoppingCartOff size={25}></TbShoppingCartOff>
                     </button>
               <button    
