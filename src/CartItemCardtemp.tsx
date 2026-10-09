@@ -2,7 +2,7 @@ import type { CartItemDto } from "./types/cart.ts";
 import {FiHeart, FiCheck} from "react-icons/fi"
 import React, {useState} from "react";
 import {TiDelete} from "react-icons/ti"
-
+import {useCart} from "./context/CartContext.tsx"
 
 export interface CartItemCardProps {
     cartItem: CartItemDto;
@@ -10,6 +10,8 @@ export interface CartItemCardProps {
 
 function CartItemCard({cartItem}:CartItemCardProps){
     const [quantity, setQuantity] = useState(1);
+    const {removeFromCart}=useCart();
+     
     return(
         <div className="relative bg-gradient-to-b from-[#163B32]/30 to-[#051F20]/50 border border-[#10B981]/30 rounded-2xl p-4">
            
@@ -28,7 +30,7 @@ function CartItemCard({cartItem}:CartItemCardProps){
             <button className="absolute top-3 right-14 text-gray-300 border border-[#DAF1DE]/10 rounded-full p-2 bg-[#051F20]/80 hover:text-[#10B981] hover:bg-[#051F20]/40 transition-all cursor-pointer">
             <FiHeart size={20} ></FiHeart>
             </button>
-            <button className="absolute top-3 right-2 text-gray-300 border border-[#DAF1DE]/10 rounded-full p-2 bg-[#051F20]/80 hover:text-[#10B981] hover:bg-[#051F20]/40 transition-all cursor-pointer">
+            <button type="button" onClick={() => removeFromCart(cartItem.id)} className="absolute top-3 right-2 text-gray-300 border border-[#DAF1DE]/10 rounded-full p-2 bg-[#051F20]/80 hover:text-[#10B981] hover:bg-[#051F20]/40 transition-all cursor-pointer">
             <TiDelete size={20} ></TiDelete>
             </button>
             
