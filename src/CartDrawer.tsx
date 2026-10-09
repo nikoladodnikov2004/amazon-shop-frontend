@@ -17,6 +17,7 @@ function CartDrawer ({isOpen, onClose}:CartDrawerProps){
 
     
     const {cartItems, totalPrice} = useCart();
+    const {clearCart} = useCart();
 
 
 
@@ -41,6 +42,12 @@ function CartDrawer ({isOpen, onClose}:CartDrawerProps){
                     <h3 className="text-lg uppercase pl-3 font-extrabold text-[#DAF1DE]/80 tracking-tighter leading-relaxed ">Вашата количка</h3>
                     
                     </div>
+                    <div className="gap-1">
+                    <button type="button"
+
+                                         onClick={() =>clearCart()} className="text-gray-300/30 cursor-pointer hover:bg-[#DAF1DE]/10 hover:text-gray-300 rounded-lg transform duration-300 leading-relaxed p-1 mb-1 mr-5">
+                    <TbShoppingCartOff size={25}></TbShoppingCartOff>
+                    </button>
               <button    
 
                                          type="button"
@@ -52,6 +59,7 @@ function CartDrawer ({isOpen, onClose}:CartDrawerProps){
                                          ><VscChromeClose size={25}></VscChromeClose>
 
                                          </button>
+                                         </div>
                                          
            
            </div>
