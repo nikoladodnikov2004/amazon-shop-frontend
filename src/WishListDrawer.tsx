@@ -1,20 +1,23 @@
 import {useState} from "react";
 import {TiDelete, TiShoppingBag} from "react-icons/ti";
-import {FiHeart} from "react-icons/fi";
+import {FiShoppingCart} from "react-icons/fi";
 import { TbShoppingCartOff} from "react-icons/tb";
+import { VscChromeClose } from "react-icons/vsc";
+import WishListItemCard from "./WishListItemCard.tsx"
+import {useWishList} from "./context/wishListContext.tsx"
+import { FiPercent } from "react-icons/fi";
 
-
-interface WishListDrawerProps {
+interface WishListProps {
     isOpen:boolean;
     onClose: () => void;
-    wishListItems?: any[];
-    onRemoveFromWishList?: (id:number) => void;
+    
 }
 
-function WishListDrawer ({isOpen, onClose, wishListItems =[], onRemoveFromWishList}:WishListDrawerProps){
+function WishListDrawer ({isOpen, onClose}:WishListProps){
 
     
-    const totalPrice = wishListItems.reduce((acc,item) => acc + (item.price * (item.quantity || 1)), 0);
+    const {wishListItems} = useWishList();
+    const {clearWishList} = useWishList();
 
 
 
@@ -29,37 +32,66 @@ function WishListDrawer ({isOpen, onClose, wishListItems =[], onRemoveFromWishLi
         }`}
             />
 
-        <aside className={`fixed top-0 right-0 h-full w-[85%] sm:w-[450px] 
-         border border-[#DAF1DE]/15 transform transition-transform duration-300 ease-in-out ${
+        <aside className={`fixed top-0 right-0 h-full w-[85%] sm:w-[450px] bg-[#051F20] bg-gradient-to-b from-[#163B32]/30 to-[#051F20]/50 border border-[#DAF1DE]/15 transform transition-transform duration-300 ease-in-out ${
             isOpen ? "translate-x-0" : "translate-x-full"
         }`}>
             <div>
                 <div className="flex items-center justify-between mt-7 ">
                     <div className="flex items-center justify-start">
-                    <FiHeart size={45} className="ml-3 text-[#10B981] bg-[#163B32]/30 border border-[#DAF1DE]/15 rounded-2xl p-2"></FiHeart>
-                    <h3 className="text-lg uppercase pl-3 font-extrabold text-[#DAF1DE] tracking-tighter leading-relaxed ">Вашата количка</h3>
+                    <FiShoppingCart size={45} className="ml-3 text-[#10B981]/50  border border-[#DAF1DE]/15 rounded-2xl p-2"></FiShoppingCart>
+                    <h3 className="text-lg uppercase pl-3 font-extrabold text-[#DAF1DE]/80 tracking-tighter leading-relaxed ">Вашата количка</h3>
+                    
                     </div>
-         <button    
+                    <div className="gap-1">
+                    <button 
+                    type="button"
+
+                    onClick={() =>clearWishList()} 
+                    className="text-gray-300/30 cursor-pointer hover:bg-[#DAF1DE]/10 hover:text-gray-300 rounded-lg transform duration-300 leading-relaxed p-1 mb-1 mr-5">
+                    <TbShoppingCartOff size={25}></TbShoppingCartOff>
+                    </button>
+              <button    
+
                                          type="button"
+
                                          onClick={() =>onClose()}
-                                         className="mr-4 text-gray-300 cursor-pointer hover:bg-[#DAF1DE]/10 rounded-2xl hover:text-[#10B981] transform duration-300 leading-relaxed "
-                                         ><TiDelete size={30}></TiDelete>
+
+                                         className="mr-4 text-gray-300/30 cursor-pointer hover:bg-[#DAF1DE]/10 hover:text-gray-300 rounded-lg transform duration-300 leading-relaxed p-1 mb-1 mr-5"
+
+                                         ><VscChromeClose size={25}></VscChromeClose>
+
                                          </button>
+                                         </div>
                                          
-                
+           
            </div>
-           <div className="border-0.5px border-t mt-5 border-[#DAF1DE]/20"></div>
+               
+           {wishListItems.length===0?(
+            
+           
             <div className="flex flex-col items-center justify-center">
-            <div className="mt-[50%] text-[#DAF1DE]/60 bg-gradient-to-b from-[#163B32]/30 to-[#051F20]/50 border border-[#DAF1DE]/15 rounded-2xl px-7 py-5">
-           <TbShoppingCartOff size={100}></TbShoppingCartOff>
+            <div className="mt-[50%] text-[#DAF1DE]/60 bg-gradient-to-b from-[#163B32]/30 to-[#051F20]/50 border border-[#10B981]/40 rounded-2xl px-7 py-5">
+           <TbShoppingCartOff size={80}></TbShoppingCartOff>
            </div>
-           <h2 className=" text-[#DAF1DE]/60 text-xl uppercase font-extrabold mt-4">Вашата количка е празна</h2>
-           <button type="submit" className='w-full max-w-[60%] py-4 mt-4 rounded-xl bg-[#DAF1DE] text-[#235347] hover:bg-[#163B32] transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)]  transform cursor-pointer uppercase font-extrabold tracking-tighter text-sm hover:text-[#DAF1DE]'>Разгледай нашите категории</button>
+           <h2 className=" text-[#DAF1DE]/60 text-xl uppercase font-extrabold mt-4">Вашият списък с любими е празен</h2>
+           <h2 className=" text-gray-300/30 text-sm font-bold mt-4 text-center ">Все още нямате добавени артикули. Разгледайте нашите актуални предложения.</h2>
+           <button type="submit" className='mt-4 w-full max-w-[70%] py-4 rounded-xl hover:bg-[#DAF1DE] hover:text-[#235347] bg-[#10B981]/50 transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)]  transform cursor-pointer uppercase font-extrabold tracking-tighter text-sm text-[#DAF1DE]'>Разгледай нашите категории</button>
            </div>
 
+           ) : (
+            <div className="flex flex-col gap-3 px-4 max-h-[calc(100vh-220px)] overflow-y-auto mt-4">
+                
+                    {wishListItems.map((wishListItems) => (
+                        <WishListItemCard key={wishListItems.id || wishListItems.productId} wishListItem={wishListItems}></WishListItemCard>
+                    ))}
+                
+
+            </div>
+)}
+            
            
         </div>   
-                                  
+                              
         </aside>
           
         </div>
@@ -68,5 +100,4 @@ function WishListDrawer ({isOpen, onClose, wishListItems =[], onRemoveFromWishLi
     )
 }
 
-export default WishListDrawer
-;
+export default WishListDrawer;
