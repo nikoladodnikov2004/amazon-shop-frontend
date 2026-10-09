@@ -19,7 +19,7 @@ export const cartService = {
   },
 
   removeFromCart: async (id: number): Promise<void> => {
-    await api.delete(`/Cart/remove/${id}`);
+    await api.delete(`/Cart/${id}`);
   },
 
  
