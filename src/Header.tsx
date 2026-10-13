@@ -6,9 +6,10 @@ import {Link} from 'react-router-dom';
 interface HeaderProps {
     onOpenCart?: () => void; // Въпросителната прави проп незадължителен
      onOpenWishList?: () => void;
+      onOpenCategory?: () => void;
 }
 
-function Header({onOpenCart,onOpenWishList}: HeaderProps) { 
+function Header({onOpenCart,onOpenWishList, onOpenCategory}: HeaderProps) { 
   return (
     
     <header className="fixed top-4 left-0 w-full z-50 flex justify-center px-4">
@@ -19,7 +20,9 @@ function Header({onOpenCart,onOpenWishList}: HeaderProps) {
         
         <div className="w-1/3 flex items-center justify-start">
           <ul className="flex items-center gap-6 uppercase text-[#DAF1DE] text-sm font-extrabold tracking-tight">
+            <button onClick={onOpenCategory}>
             <MenuIcon></MenuIcon>
+            </button>
             
             <li>За нас</li>
             <li>Контакти</li>
