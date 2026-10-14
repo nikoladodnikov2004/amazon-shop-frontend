@@ -2,7 +2,7 @@ import type { WishListItemDto } from "./types/wishlist.ts";
 import {FiHeart, FiCheck} from "react-icons/fi"
 import React, {useState} from "react";
 import {TiDelete} from "react-icons/ti"
-import {useWishList} from "./context/wishListContext.tsx"
+import {useWishList} from "./context/WishListContexttemp.tsx"
 
 export interface WishListCardProps {
     wishListItem: WishListItemDto;

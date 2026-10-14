@@ -35,9 +35,10 @@ interface WishListContextType{
 
 const WishListContext = createContext<WishListContextType | undefined>(undefined);
 
-export const CartProvider: React.FC<{children: React.ReactNode}> =({children})=>{
+export const WishListProvider: React.FC<{children: React.ReactNode}> =({children})=>{
     const [wishListItems, setWishListItems] = useState<WishListItemDto[]>([]);
     const [isOpen, setIsOpen] = useState(false);
+    
     const [loading, setLoading]= useState(false);
     const {isAuthenticated}=useAuth();
 
@@ -67,7 +68,7 @@ export const CartProvider: React.FC<{children: React.ReactNode}> =({children})=>
 
     const addToWishList = async (productId:number) =>{
         try{
-            await wishListService.addToCart(productId);
+            await wishListService.addToWishList(productId);
             
            await fetchWishList();
         

@@ -9,16 +9,21 @@ import ProductSection from './ProductSection.tsx';
 import ProductDetailsPage from './pages/ProductDetailsPage.tsx';
 import  CartDrawer  from './CartDrawer.tsx'; // Импортираме Drawer-а
 import  WishListDrawer  from './WishListDrawer.tsx';
+import  CategoryDrawer  from './CategoryDrawer.tsx';
 import  AdminPanel  from './AdminPanel.tsx';
 import { CartProvider } from './context/CartContext.tsx';
+import { WishListProvider } from './context/WishListContexttemp.tsx';
 import { useCart } from './context/CartContext.tsx';
+import { useWishList } from './context/WishListContexttemp.tsx';
+import { useCategory } from './context/CategoryContext.tsx';
 
 function App() {
   // 1. Декларираме състоянието за количката
   const {isOpen: isCartOpen, openCart, closeCart} = useCart();
 
-  const [isWishListOpen, setIsWishListOpen] = useState(false);
-  const [wishListItems, setWishListItems] = useState([]); // Тук ще държим продуктите
+  const {isOpen: isWishListOpen, openWishList, closeWishList} = useWishList();
+
+  const {isOpen: isCategoryOpen, openCategory, closeCategory} = useCategory();
 
   return (
     <>
@@ -28,8 +33,11 @@ function App() {
       
       
       <Header onOpenCart={openCart}
-        onOpenWishList={() => setIsWishListOpen(true)}
+        onOpenWishList={openWishList}
+        onOpenCategory={openCategory}
         />
+
+        
         
 
       {/* 3. Извикваме самия CartDrawer */}
@@ -43,8 +51,14 @@ function App() {
       {/* 3. Извикваме самия CartDrawer */}
       <WishListDrawer 
         isOpen={isWishListOpen} 
-        onClose={() => setIsWishListOpen(false)} 
-        wishListItems={wishListItems}
+        onClose={closeWishList} 
+        
+      />
+
+      <CategoryDrawer 
+        isOpen={isCategoryOpen} 
+        onClose={closeCategory} 
+        
       />
 
       <Routes>

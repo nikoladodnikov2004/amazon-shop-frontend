@@ -2,6 +2,7 @@ import React from "react";
 import {FiShoppingCart, FiHeart, FiEdit2, FiTrash2} from "react-icons/fi";
 import {Link} from "react-router-dom";
 import {useCart} from "../context/CartContext";
+import {useWishList} from "../context/WishListContexttemp";
 
 export interface Product {
     id: number;
@@ -19,12 +20,20 @@ interface ProductCardProps {
 function ProductCard({ product }: ProductCardProps) {
 
     const {addToCart} = useCart();
+    const {addToWishList} = useWishList();
 
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
         console.log("Добавяне на продукт ID:", product.id);
         addToCart(2);
+    };
+
+    const handleAddToWishList = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("Добавяне на продукт ID:", product.id);
+        addToWishList(2);
     };
     
     return (
@@ -37,7 +46,7 @@ function ProductCard({ product }: ProductCardProps) {
                         {product.badge}
                     </span>
                 )}
-                <button className="group absolute top-3 right-3 w-8 h-8 backdrop-blur-md rounded-full bg-[#051F20]/70 flex items-center justify-center hover:text-[#10B981] transition-colors duration-300">
+                <button type="button" onClick={handleAddToWishList} className="group absolute top-3 right-3 w-8 h-8 backdrop-blur-md rounded-full bg-[#051F20]/70 flex items-center justify-center hover:text-[#10B981] transition-colors duration-300">
                     <FiHeart className="text-[#DAF1DE] hover:text-[#10B981] hover:fill-[#10B981] transition-colors duration-300 size-4" />
                 </button>
                 <button className="group absolute bottom-3 right-12 w-8 h-8 backdrop-blur-md rounded-full bg-[#051F20]/70 flex items-center justify-center hover:text-[#10B981] transition-colors duration-300">

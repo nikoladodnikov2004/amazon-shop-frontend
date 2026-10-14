@@ -7,8 +7,8 @@ export const categoryService = {
     return response.data;
   },
 
-  addCategory: async (id: number): Promise<CategoryItemDto> => {
-    const response = await api.post<CategoryItemDto>("/Category", { id });
+  addCategory: async (name: string): Promise<CategoryItemDto> => {
+    const response = await api.post<CategoryItemDto>("/Category", { name });
     return response.data;
   },
 

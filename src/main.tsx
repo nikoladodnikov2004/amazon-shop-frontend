@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.tsx'
 import { AuthProvider } from './context/AuthContext.tsx';
 import { CartProvider } from './context/CartContext';
+import { CategoryProvider } from './context/CategoryContext';
 import { WishListProvider } from './context/WishListContexttemp.tsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
@@ -16,11 +17,13 @@ createRoot(document.getElementById('root')!).render(
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
     <BrowserRouter>
     <AuthProvider>
+      <CategoryProvider>
       <WishListProvider>
         <CartProvider>
     <App />
     </CartProvider>
     </WishListProvider>
+    </CategoryProvider>
     </AuthProvider>
     </BrowserRouter>
     </GoogleOAuthProvider>

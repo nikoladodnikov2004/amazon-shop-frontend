@@ -4,7 +4,7 @@ import {FiShoppingCart} from "react-icons/fi";
 import { TbShoppingCartOff} from "react-icons/tb";
 import { VscChromeClose } from "react-icons/vsc";
 import WishListItemCard from "./WishListItemCard.tsx"
-import {useWishList} from "./context/wishListContext.tsx"
+import {useWishList} from "./context/WishListContexttemp.tsx"
 import { FiPercent } from "react-icons/fi";
 
 interface WishListProps {
@@ -81,10 +81,11 @@ function WishListDrawer ({isOpen, onClose}:WishListProps){
            ) : (
             <div className="flex flex-col gap-3 px-4 max-h-[calc(100vh-220px)] overflow-y-auto mt-4">
                 
-                    {wishListItems.map((wishListItems) => (
-                        <WishListItemCard key={wishListItems.id || wishListItems.productId} wishListItem={wishListItems}></WishListItemCard>
+                    {wishListItems.map((wishListItem) => (
+                        <WishListItemCard key={wishListItem.id || wishListItem.productId} wishListItem={wishListItem}></WishListItemCard>
                     ))}
                 
+
 
             </div>
 )}
