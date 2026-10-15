@@ -15,7 +15,7 @@ function Header({onOpenCart,onOpenWishList, onOpenCategory}: HeaderProps) {
     <header className="fixed top-4 left-0 w-full z-50 flex justify-center px-4">
       
       
-      <nav className="flex items-center justify-between px-8 mt-5  w-full max-w-6xl rounded-2xl bg-[#235347]/25  backdrop-blur-md border border-[#163B32] shadow-[0_20px_50px_rgba(5,31,32,0.9)] transition-all duration-300">
+      <nav className="flex items-center justify-between px-8 mt-5  w-full max-w-6xl  backdrop-blur-md rounded-2xl shadow-[0_20px_50px_rgba(5,31,32,0.9)] transition-all duration-300">
         
         
         <div className="w-1/3 flex items-center justify-start">
@@ -67,9 +67,7 @@ function Header({onOpenCart,onOpenWishList, onOpenCategory}: HeaderProps) {
             <span className="absolute -top-2 -right-2 bg-[#11676a] text-white rounded-full h-4 w-4 flex items-center justify-center text-xs">0</span>
           </button>
 
-          <Link to="/admin" className="relative text-[#DAF1DE] hover:text-[#11676a] transition-colors duration-300">
-            <Settings className="h-7 w-7" />
-          </Link>
+          
         </div>
 
       </nav>
