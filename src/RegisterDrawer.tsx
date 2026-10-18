@@ -1,0 +1,172 @@
+import {useState} from "react";
+import {TiDelete, TiShoppingBag} from "react-icons/ti";
+import {FiShoppingCart} from "react-icons/fi";
+import { TbShoppingCartOff} from "react-icons/tb";
+import { VscChromeClose } from "react-icons/vsc";
+import CartItemCard from "./CartItemCardtemp.tsx"
+import {useCart} from "./context/CartContext.tsx"
+import { FiPercent } from "react-icons/fi";
+import { Form } from 'lucide-react';
+import React from 'react';
+import {Link} from 'react-router-dom';
+import logo from './assets/niesalogin.svg';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
+import { Icon } from 'lucide-react';
+import { EyeOff } from 'lucide-react';
+import { Eye } from 'lucide-react';
+import { useGoogleLogin } from '@react-oauth/google';
+import { FaFacebook, FaApple, FaGoogle } from 'react-icons/fa';
+
+
+interface RegisterDrawerProps {
+    isOpen:boolean;
+    onClose: () => void;
+    onOpenLogin?: () => void;
+}
+
+function RegisterDrawer ({isOpen, onClose, onOpenLogin}:RegisterDrawerProps){
+    const [FirstName, setFirstName] = useState('');
+    const [LastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword]= useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading]= useState(false);
+
+  const {register}=useAuth();
+  const navigate = useNavigate();
+
+  const googleLogin=useGoogleLogin({
+    onSuccess:(tokenResponse) =>{
+      console.log('Google Token:', tokenResponse.access_token);
+    },
+    onError:() =>console.error('Google Login Failed'),
+  });
+
+
+const handleSubmit = async(e: React.FormEvent) => {
+  e.preventDefault();
+  setError(null);
+  setLoading(true);
+
+  try{
+    await register(FirstName, LastName, email, password);
+    navigate('/');
+  }catch(err:any){
+    setError(err.response?.data?.message ||'Грешен имейл или парола!')
+  }finally{
+    setLoading(false)
+  }
+  
+};
+
+const handleLoginClick = () =>{
+    onClose();
+
+    setTimeout(() => {
+        onOpenLogin?.();
+    }, 200);
+}
+    return(
+        <div className = {`fixed inset-0 z-[999] flex items-center justify-center p-4 transition-opacity duration-300 ${
+            isOpen ? "opacity-100 pointer-events-auto " : "opacity-0 pointer-events-none "
+        }`}>
+         <div 
+        onClick={onClose}
+        className={`fixed inset-0 bg-black/70  transition-opacity duration-300 ease-out cursor-pointer ${
+         isOpen ? " opacity-100" : " opacity-0"
+        }`}
+            />
+
+        <aside className={`relative  z-10 bottom-[5%] w-full max-w-md  transition-all duration-300 ease-out transform ${
+            isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        }`}>
+           
+                                         
+                                         
+           
+           
+           
+               
+           <div className="min-h-screen  text-[#DAF1DE] pt-32 pb-16 px-6 flex justify-center items-center relative overflow-hidden font-sans">
+    <div className='absolute w-[450px] h-[450px] rounded-full blur-[130px] pointer-events-none'/>
+    <div className="w-full max-w-md bg-[#0B2B26]/80 backdrop-blur-xl border border-[#163B32] p-8 sm:p-10 rounded-2xl shadow-[0_20px_50px_rgba(5,31,32,0.9)] relative z-10">
+    
+    
+    <div className='text-center mb-8'>
+        
+        <img 
+          src={logo} 
+          alt="Niesa LogIn" 
+          className="w-52 h-auto mb-4 mx-auto block"
+        />
+        <h2 className='text-3xl font-extrabold tracking-tight'>Добре дошли</h2>
+        <p className='text-[#8EB69B] text-sm mt-3'>Регистрирайте се и влезте в своя профил за да продължите</p>
+    </div>
+    
+
+    <form onSubmit={handleSubmit} className='space-y-5'>
+      <div>
+        <label className='block text-xs font-mono uppercase mb-2'>Име</label>
+        <input
+          type="firstName"
+          value={FirstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          placeholder='First Name'
+          required
+          className='w-full bg-[#051F20] border border-[#163B32] rounded-xl px-4 py-3.5 text-[#DAF1DE] placeholder-[#8EB69B]/40 focus:outline-none focus:border-[#8EB69B] focus:ring-1 focus:ring-[#8EB69B] transition-all'
+        />
+      </div>
+      <div>
+        <label className='block text-xs font-mono uppercase mb-2'>Фамилия</label>
+        <input
+          type="lastName"
+          value={LastName}
+          onChange={(e) => setLastName(e.target.value)}
+          required
+          placeholder='Last Name'
+           className='w-full bg-[#051F20] border border-[#163B32] rounded-xl px-4 py-3.5 text-[#DAF1DE] placeholder-[#8EB69B]/40 focus:outline-none focus:border-[#8EB69B] focus:ring-1 focus:ring-[#8EB69B] transition-all'
+        />
+      </div>
+      <div>
+        <label className='block text-xs font-mono uppercase mb-2'>Имейл Адрес</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder='name@example.com'
+          required
+          className='w-full bg-[#051F20] border border-[#163B32] rounded-xl px-4 py-3.5 text-[#DAF1DE] placeholder-[#8EB69B]/40 focus:outline-none focus:border-[#8EB69B] focus:ring-1 focus:ring-[#8EB69B] transition-all'
+        />
+      </div>
+      <div>
+        <label className='block text-xs font-mono uppercase mb-2'>Парола</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          placeholder='Password'
+           className='w-full bg-[#051F20] border border-[#163B32] rounded-xl px-4 py-3.5 text-[#DAF1DE] placeholder-[#8EB69B]/40 focus:outline-none focus:border-[#8EB69B] focus:ring-1 focus:ring-[#8EB69B] transition-all'
+        />
+      </div>
+      <button type="submit" className='w-full py-4 mt-2 rounded-xl bg-[#235347] text-[#DAF1DE] font-semibold hover:bg-[#163B32] transition-all shadow-[0_4px_25px_rgba(35,83,71,0.5)] border border-[#8EB69B]/20 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer '>Регистрирай се</button>
+    </form>
+    <p className='text-center text-xs text-[#8EB69B] mt-8'>
+      Вече имате профил? <button type="button" onClick={handleLoginClick} className='text-[#DAF1DE] font-semibold underline hover:text-[#8EB69B] transition-colors'>Влезте от тук</button>
+    </p>
+  </div>
+  </div>
+           
+        
+                              
+        </aside>
+          
+        </div>
+        
+        
+    )
+}
+
+export default RegisterDrawer;
