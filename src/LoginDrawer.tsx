@@ -22,17 +22,18 @@ import { FaFacebook, FaApple, FaGoogle } from 'react-icons/fa';
 interface LoginDrawerProps {
     isOpen:boolean;
     onClose: () => void;
+    onOpenRegister?: () => void;
     
 }
 
-function LoginDrawer ({isOpen, onClose}:LoginDrawerProps){
+function LoginDrawer ({isOpen, onClose, onOpenRegister}:LoginDrawerProps){
 const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword]= useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading]= useState(false);
 
-  const {login}=useAuth();
+    const {login}=useAuth();
   const navigate = useNavigate();
 
   const googleLogin=useGoogleLogin({
@@ -59,54 +60,38 @@ const handleSubmit = async(e: React.FormEvent) => {
   
 };
 
+const handleRegisterClick = () =>{
+    onClose();
+
+    setTimeout(() => {
+        onOpenRegister?.();
+    }, 200);
+}
+
+
     return(
-        <div className = {`fixed inset-0 z-[999] justify-center transition-opacity duration-300 ${
-            isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        <div className = {`fixed inset-0 z-[999] flex items-center justify-center p-4 transition-opacity duration-300 ${
+            isOpen ? "opacity-100 pointer-events-auto " : "opacity-0 pointer-events-none "
         }`}>
          <div 
         onClick={onClose}
-        className={`fixed inset-0 bg-black/70  transition-opacity duration-300 ease-in-out cursor-pointer ${
+        className={`fixed inset-0 bg-black/70  transition-opacity duration-300 ease-out cursor-pointer ${
          isOpen ? " opacity-100" : " opacity-0"
         }`}
             />
 
-        <aside className={`fixed z-10 h-[calc(100vh-2rem)] w-[calc(100%-2rem)] sm:w-[420px] transform transition-transform duration-300 ease-in-out ${
-            isOpen ? "translate-x-0" : "translate-x-[calc(100%+2rem)]"
+        <aside className={`relative  z-10 bottom-[5%] w-full max-w-md  transition-all duration-300 ease-out transform ${
+            isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}>
-            <div className="h-full w-full bg-[#051F20]/90 backdrop-blur-xl border border-white/10 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.8)] flex flex-col justify-between overflow-hidden">
-                <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.02] p-5 relative z-20">
-                    <div className="flex items-center justify-start">
-                    <FiShoppingCart size={45} className="ml-1 text-[#10B981]  border border-[#DAF1DE]/15 rounded-2xl p-2"></FiShoppingCart>
-                    <h3 className="text-lg uppercase pl-3 font-extrabold text-[#DAF1DE]/80 tracking-tighter leading-relaxed ">Вашата количка</h3>
-                    
-                    </div>
-                    <div className="gap-1 ">
-                    <button 
-                    type="button"
-
-                    
-                    className="text-gray-300/30 cursor-pointer hover:bg-[#DAF1DE]/10 hover:text-gray-300 rounded-lg transform duration-300 leading-relaxed p-1 mb-1 mr-5">
-                    <TbShoppingCartOff size={25}></TbShoppingCartOff>
-                    </button>
-              <button    
-
-                                         type="button"
-
-                                         onClick={() =>onClose()}
-
-                                         className="mr-2 text-gray-300/30 cursor-pointer hover:bg-[#DAF1DE]/10 hover:text-gray-300 rounded-lg transform duration-300 leading-relaxed p-1 mb-1 mr-5"
-
-                                         ><VscChromeClose size={25}></VscChromeClose>
-
-                                         </button>
-                                         </div>
+           
+                                         
                                          
            
-           </div>
+           
            
                
-           <div className="min-h-screen bg-[#051F20] text-[#DAF1DE] pt-32 pb-16 px-6 flex justify-center items-center relative overflow-hidden font-sans">
-    <div className='absolute w-[450px] h-[450px] bg-[#235347]/25 rounded-full blur-[130px] pointer-events-none'/>
+           <div className="min-h-screen  text-[#DAF1DE] pt-32 pb-16 px-6 flex justify-center items-center relative overflow-hidden font-sans">
+    <div className='absolute w-[450px] h-[450px] rounded-full blur-[130px] pointer-events-none'/>
     <div className="w-full max-w-md bg-[#0B2B26]/80 backdrop-blur-xl border border-[#163B32] p-8 sm:p-10 rounded-2xl shadow-[0_20px_50px_rgba(5,31,32,0.9)] relative z-10">
     
     
@@ -186,13 +171,13 @@ const handleSubmit = async(e: React.FormEvent) => {
     </div>
 
     <p className='text-center text-xs text-[#8EB69B] mt-8'>
-      Нямате профил? <Link to="/register" className='text-[#DAF1DE] font-semibold underline hover:text-[#8EB69B] transition-colors'>Регистрирайте се</Link>
+      Нямате профил? <button type="button" onClick={handleRegisterClick} className='text-[#DAF1DE] font-semibold underline hover:text-[#8EB69B] transition-colors'>Регистрирайте се</button>
     </p>
   </div>
   </div>
      
            
-        </div>   
+        
                               
         </aside>
           
