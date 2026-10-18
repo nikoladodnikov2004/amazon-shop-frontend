@@ -10,6 +10,9 @@ interface User{
 }
 
 interface AuthContextType {
+    isOpen: boolean;
+    openLogin: () =>void;
+    closeLogin: () =>void;
     user: User | null;
     token: string | null;
     login: (email: string, password: string) => Promise<void>;
@@ -27,7 +30,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> =({ children}) 
     });
 
 
-
+    const [isOpen, setIsOpen] = useState(false);
     const [token, setToken]=useState<string | null>(localStorage.getItem('token'));
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -78,8 +81,11 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> =({ children}) 
         await login(data.email, data.password);
     };
 
+    const openLogin = () => setIsOpen(true);
+const closeLogin= () => setIsOpen(false);
+
     return (
-        <AuthContext.Provider value={{user, token, login, logout, register, isAuthenticated: !!token}}>
+        <AuthContext.Provider value={{isOpen, closeLogin, openLogin, user, token, login, logout, register, isAuthenticated: !!token}}>
         {children}
         </AuthContext.Provider>
     ); 
