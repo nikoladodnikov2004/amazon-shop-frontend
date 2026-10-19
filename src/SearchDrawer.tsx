@@ -3,8 +3,9 @@ import {TiDelete, TiShoppingBag} from "react-icons/ti";
 import {FiShoppingCart, FiSearch} from "react-icons/fi";
 import { TbShoppingCartOff} from "react-icons/tb";
 import { VscChromeClose } from "react-icons/vsc";
-import CartItemCard from "./CartItemCardtemp.tsx"
+import BestSellerItemCard from "./BestSellerItemCard.tsx"
 import {useCart} from "./context/CartContext.tsx"
+import {useSearch} from "./context/SearchContext.tsx"
 import { FiPercent } from "react-icons/fi";
 
 interface SearchDrawerProps {
@@ -14,7 +15,7 @@ interface SearchDrawerProps {
 }
 
 function SearchDrawer ({isOpen, onClose}:SearchDrawerProps){
-
+ const {bestSellers} = useSearch();
    
    
 
@@ -79,7 +80,7 @@ function SearchDrawer ({isOpen, onClose}:SearchDrawerProps){
            
 
            
-            <div className="top-4 left-4 flex-1 relative">
+            <div className="p-6 flex-1 relative ">
                 <p className="mb-2 uppercase font-bold text-sm text-[#10B981]  ">Популярни търсения</p>
                 
                 
@@ -95,7 +96,14 @@ function SearchDrawer ({isOpen, onClose}:SearchDrawerProps){
                     ))}
                 </div>
                 <div className="mt-10">
-                    <p className=" uppercase font-bold text-sm text-[#10B981]  ">Най-продавани продукти</p>
+                    <p className=" uppercase font-bold text-sm text-[#10B981] mb-2 ">Най-продавани продукти</p>
+           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {bestSellers.map((bestSellerItem)=>(
+                <BestSellerItemCard key={bestSellerItem.id || bestSellerItem.productId} bestSellerItem={bestSellerItem}></BestSellerItemCard>
+            ))}
+            
+           </div>
+           
            </div>
              </div>  
              
